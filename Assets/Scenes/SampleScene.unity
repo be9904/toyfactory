@@ -123,6 +123,31 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &216350074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995360773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneShape: 1
+  drawBones: 1
+  drawTripods: 0
+  boneSize: 1.5
+  tripodSize: 1
+  boneColor: {r: 0, g: 0, b: 1, a: 0.5}
+  m_Transforms:
+  - {fileID: 995360779}
+  - {fileID: 995360778}
+  - {fileID: 995360777}
+  - {fileID: 995360776}
+  - {fileID: 995360775}
+  - {fileID: 995360774}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,3 +499,45 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc765e1dd0615814db983fc6eed0eba0, type: 3}
+--- !u!1 &995360773 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fc765e1dd0615814db983fc6eed0eba0,
+    type: 3}
+  m_PrefabInstance: {fileID: 995360772}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &995360774 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3537186584703497071, guid: fc765e1dd0615814db983fc6eed0eba0,
+    type: 3}
+  m_PrefabInstance: {fileID: 995360772}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &995360775 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3096613424424401917, guid: fc765e1dd0615814db983fc6eed0eba0,
+    type: 3}
+  m_PrefabInstance: {fileID: 995360772}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &995360776 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8932272923084450061, guid: fc765e1dd0615814db983fc6eed0eba0,
+    type: 3}
+  m_PrefabInstance: {fileID: 995360772}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &995360777 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4903395626461739478, guid: fc765e1dd0615814db983fc6eed0eba0,
+    type: 3}
+  m_PrefabInstance: {fileID: 995360772}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &995360778 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5746564759562468899, guid: fc765e1dd0615814db983fc6eed0eba0,
+    type: 3}
+  m_PrefabInstance: {fileID: 995360772}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &995360779 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8879528566716807029, guid: fc765e1dd0615814db983fc6eed0eba0,
+    type: 3}
+  m_PrefabInstance: {fileID: 995360772}
+  m_PrefabAsset: {fileID: 0}
