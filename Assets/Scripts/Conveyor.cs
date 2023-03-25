@@ -1,27 +1,30 @@
 using UnityEngine;
 
-public class Conveyor : MonoBehaviour
+namespace AttnKare
 {
-    private static float _speed = 25f;
-    private Vector3 direction = new(0, 0, 1);
-
-    public static float Speed
+    public class Conveyor : MonoBehaviour
     {
-        get => _speed;
-        private set {}
-    }
+        private static float _speed = 25f;
+        private Vector3 direction = new(0, 0, 1);
 
-    private void OnTriggerStay(Collider other)
-    {
-        Rigidbody r;
-        if ((r = other.gameObject.GetComponent<Rigidbody>()) != null)
+        public static float Speed
         {
-            r.velocity = Speed * direction * Time.deltaTime;
+            get => _speed;
+            private set {}
         }
-    }
 
-    public void SetSpeed(float speed)
-    {
-        Speed = speed;
+        private void OnTriggerStay(Collider other)
+        {
+            Rigidbody r;
+            if ((r = other.gameObject.GetComponent<Rigidbody>()) != null)
+            {
+                r.velocity = Speed * direction * Time.deltaTime;
+            }
+        }
+
+        public void SetSpeed(float speed)
+        {
+            Speed = speed;
+        }
     }
 }

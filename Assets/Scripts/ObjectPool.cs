@@ -1,27 +1,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool
+namespace AttnKare
 {
-    private Queue<GameObject> pool;
-
-    // constructor
-    public ObjectPool()
+    public class ObjectPool
     {
-        pool = new Queue<GameObject>();
-    }
+        private Queue<GameObject> pool;
 
-    public void Enqueue(GameObject item)
-    {
-        pool.Enqueue(item);
-    }
+        // constructor
+        public ObjectPool()
+        {
+            pool = new Queue<GameObject>();
+        }
 
-    public GameObject Dequeue()
-    {
-        GameObject objectToSpawn = pool.Count > 0 ? pool.Dequeue() : null;
+        public void Enqueue(GameObject item)
+        {
+            pool.Enqueue(item);
+        }
+
+        public GameObject Dequeue()
+        {
+            GameObject objectToSpawn = pool.Count > 0 ? pool.Dequeue() : null;
         
-        if (objectToSpawn == null) return null;
+            if (objectToSpawn == null) return null;
         
-        return objectToSpawn;
+            return objectToSpawn;
+        }
     }
 }
