@@ -19,7 +19,7 @@ namespace AttnKare
             // singleton initialization
             if (main != null && main != this)
             {
-                Debug.Log("Singleton instance of " + this.GetType().Name + " already exists.");
+                Debug.Log("Singleton instance of " + GetType().Name + " already exists.");
                 Destroy(this);
             }
             else
@@ -31,6 +31,14 @@ namespace AttnKare
                     Debug.Log("No Stage Settings Profile");
                 else
                     gameSystem.Init(settingsList[0]);
+            }
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                gameSystem.onStateChange?.Invoke();
             }
         }
     }

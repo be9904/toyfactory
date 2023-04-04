@@ -1,11 +1,28 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace AttnKare
 {
-    public abstract class State : MonoBehaviour
+    public abstract class State
     {
+        private int _stateID = -1;
+        protected bool TransitionCondition;
+        protected float TimeInterval;
+
+        public int GetStateID()
+        {
+            return _stateID;
+        }
+
+        public void SetStateID(int id)
+        {
+            _stateID = id;
+        }
+        
+        protected void SetCondition(bool condition)
+        {
+            TransitionCondition = condition;
+        }
+
         public virtual IEnumerator Keep()
         {
             yield break;
@@ -13,6 +30,7 @@ namespace AttnKare
         
         public virtual IEnumerator Transition()
         {
+            SetCondition(true);
             yield break;
         }
     }
