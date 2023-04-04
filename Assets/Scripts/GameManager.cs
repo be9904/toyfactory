@@ -38,7 +38,7 @@ namespace AttnKare
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                gameSystem.onStateChange?.Invoke();
+                gameSystem.OnStateChange?.Invoke();
             }
         }
     }

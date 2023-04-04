@@ -13,7 +13,7 @@ namespace AttnKare
         private State waitingState = new Waiting();
         private State playingState = new Playing();
 
-        public Action onStateChange;
+        public Action OnStateChange;
 
         // custom initialization function for monobehaviour inheriting class
         public GameSystem Init(StageSettings stageSettings)
@@ -38,7 +38,7 @@ namespace AttnKare
             Debug.Log("Total number of states in state machine: " + stateCount);
             
             // setup state machine event
-            onStateChange += UpdateState;
+            OnStateChange += UpdateState;
             
             // start state machine
             StartCoroutine(waitingState.Keep());
@@ -50,12 +50,10 @@ namespace AttnKare
         {
             if (State.GetStateID() == waitingState.GetStateID())
             {
-                Debug.Log("Change state from " + State.GetType() + " to " + playingState.GetType());
                 SetState(playingState);
             }
             else if (State.GetStateID() == playingState.GetStateID())
             {
-                Debug.Log("Change state from " + State.GetType() + " to " + waitingState.GetType());
                 SetState(waitingState);
             }
         }
