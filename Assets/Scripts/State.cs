@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 
 namespace AttnKare
@@ -31,6 +32,13 @@ namespace AttnKare
         public virtual IEnumerator Transition()
         {
             SetCondition(true);
+            yield break;
+        }
+        
+        public virtual IEnumerator Transition(Action func)
+        {
+            SetCondition(true);
+            func();
             yield break;
         }
     }

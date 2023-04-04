@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 
 namespace AttnKare
@@ -13,7 +11,7 @@ namespace AttnKare
         private State waitingState = new Waiting();
         private State playingState = new Playing();
 
-        public Action OnStateChange;
+        public Action<Action> OnStateChange;
 
         // custom initialization function for monobehaviour inheriting class
         public GameSystem Init(StageSettings stageSettings)
@@ -34,9 +32,7 @@ namespace AttnKare
                 Debug.Log(GetType() + " : Invalid stage settings asset.");
                 return null;
             }
-            LoadStageSettings(stageSettings);
-            Debug.Log("Total number of states in state machine: " + stateCount);
-            
+
             // setup state machine event
             OnStateChange += UpdateState;
             
@@ -46,22 +42,16 @@ namespace AttnKare
             return this;
         }
 
-        void UpdateState()
+        void UpdateState(Action func)
         {
             if (State.GetStateID() == waitingState.GetStateID())
             {
-                SetState(playingState);
+                SetState(playingState, func);
             }
             else if (State.GetStateID() == playingState.GetStateID())
             {
-                SetState(waitingState);
+                SetState(waitingState, func);
             }
-        }
-
-        public void LoadStageSettings(StageSettings settings)
-        {
-            Debug.Log("Loaded: " + settings.name);
-            stageSettings = settings;
         }
     }
 
@@ -79,6 +69,13 @@ namespace AttnKare
                 Debug.Log("Current State: " + GetType());
             }
         }
+
+        public override IEnumerator Transition(Action loadStageInfo)
+        {
+            SetCondition(true);
+            loadStageInfo();
+            yield return new WaitForSeconds(3f);
+        }
     }
     #endregion
 
@@ -95,6 +92,13 @@ namespace AttnKare
                 yield return null;
                 Debug.Log("Current State: " + GetType());
             }
+        }
+        
+        public override IEnumerator Transition(Action saveStageInfo)
+        {
+            SetCondition(true);
+            saveStageInfo();
+            yield return new WaitForSeconds(3f);
         }
     }
     #endregion

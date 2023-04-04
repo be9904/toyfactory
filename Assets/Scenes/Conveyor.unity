@@ -407,6 +407,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingsList:
   - {fileID: 11400000, guid: 16d2bc43a0de9d241959afe8fffe9564, type: 2}
+  - {fileID: 11400000, guid: dfb4fcd8c793916428b6c1c57718e90b, type: 2}
+  - {fileID: 11400000, guid: 916bf5cca32df4144b33fa91ab1fb159, type: 2}
+  stageCounter: 0
+  currentStageSettings: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

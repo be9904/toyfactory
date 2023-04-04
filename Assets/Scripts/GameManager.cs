@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +10,9 @@ namespace AttnKare
 
         private GameSystem gameSystem;
         [SerializeField] private List<StageSettings> settingsList;
+
+        public int stageCounter;
+        public StageSettings currentStageSettings;
 
         // public event Action<GameState> UpdateGameState;
 
@@ -38,8 +40,36 @@ namespace AttnKare
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                gameSystem.OnStateChange?.Invoke();
+                gameSystem.OnStateChange?.Invoke(HandleStage);
             }
+        }
+
+        void HandleStage()
+        {
+            if (gameSystem.GetState().GetStateID() == 0) // waiting
+                LoadStageInfo();
+            else if (gameSystem.GetState().GetStateID() == 1) // playing
+                SaveStageInfo();
+        }
+
+        void LoadStageInfo()
+        {
+            LoadStageSettings();
+            // Debug.Log("Loaded Stage Info");
+        }
+
+        void SaveStageInfo()
+        {
+            stageCounter++;
+            // Debug.Log("Saved Stage Info");
+        }
+        
+        void LoadStageSettings()
+        {
+            if (stageCounter < settingsList.Count)
+                currentStageSettings = settingsList[stageCounter];
+            else
+                Debug.Log("Invalid stage counter: " + stageCounter);
         }
     }
 }
