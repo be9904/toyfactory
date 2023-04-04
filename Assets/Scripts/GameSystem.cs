@@ -44,7 +44,12 @@ namespace AttnKare
 
         void UpdateState(Action func)
         {
-            if (State.GetStateID() == waitingState.GetStateID())
+            if (Status)
+            {
+                SetState(waitingState);
+                Debug.Log("Game Over");
+            }
+            else if (State.GetStateID() == waitingState.GetStateID())
             {
                 SetState(playingState, func);
             }

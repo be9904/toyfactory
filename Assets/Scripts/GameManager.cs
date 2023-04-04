@@ -61,6 +61,8 @@ namespace AttnKare
         void SaveStageInfo()
         {
             stageCounter++;
+            if(stageCounter > 2)
+                gameSystem.End();
             // Debug.Log("Saved Stage Info");
         }
         
