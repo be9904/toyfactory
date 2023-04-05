@@ -21,7 +21,10 @@ namespace AttnKare
             // singleton initialization
             if (main != null && main != this)
             {
-                Debug.Log("Singleton instance of " + GetType().Name + " already exists.");
+                Debug.Log(
+                    "Singleton instance of " + GetType().Name + " already exists. " + 
+                    "Destroying instance " + gameObject.GetInstanceID() + "."
+                    );
                 Destroy(this);
             }
             else
@@ -30,7 +33,7 @@ namespace AttnKare
                 gameSystem = gameObject.AddComponent<GameSystem>();
 
                 if (settingsList.Count == 0)
-                    Debug.Log("No Stage Settings Profile");
+                    Debug.Log(GetType() + " : No Stage Settings Profile");
                 else
                     gameSystem.Init(settingsList[0]);
             }
@@ -38,24 +41,34 @@ namespace AttnKare
 
         private void Update()
         {
+            // stage ready (waiting -> playing)
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                gameSystem.OnStateChange?.Invoke(HandleStage);
+                gameSystem.OnStageReady?.Invoke(PrepareStage);
+            }
+
+            // stage end (playing -> waiting)
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                gameSystem.OnStageEnd?.Invoke(FinishStage);
             }
         }
 
-        void HandleStage()
+        // Waiting -> Playing
+        void PrepareStage()
         {
-            if (gameSystem.GetState().GetStateID() == 0) // waiting
-                LoadStageInfo();
-            else if (gameSystem.GetState().GetStateID() == 1) // playing
-                SaveStageInfo();
-        }
-
-        void LoadStageInfo()
-        {
+            // load stage settings
             LoadStageSettings();
-            // Debug.Log("Loaded Stage Info");
+            // reset player stats
+            // start robot, box spawn sequence
+        }
+        
+        // Playing -> Waiting
+        void FinishStage()
+        {
+            // save stage status
+            SaveStageInfo();
+            // stop robot, box spawn sequence
         }
 
         void SaveStageInfo()

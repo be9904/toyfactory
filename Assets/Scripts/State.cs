@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
+using UnityEngine;
 
 namespace AttnKare
 {
-    public abstract class State
+    public abstract class State : StateMachine
     {
         private int _stateID = -1;
         protected bool TransitionCondition;
-        protected float TimeInterval;
+        protected float TimeInterval = 1f;
 
         public int GetStateID()
         {
@@ -24,22 +25,22 @@ namespace AttnKare
             TransitionCondition = condition;
         }
 
-        public virtual IEnumerator Keep()
+        public virtual IEnumerator LoopState()
         {
-            yield break;
+            SetCondition(false);
+
+            while (!TransitionCondition)
+            {
+                // do what this state is supposed to do
+                yield return null;
+                Debug.Log("Current State: " + GetType());
+            }
         }
         
-        public virtual IEnumerator Transition()
+        public virtual IEnumerator EndState()
         {
             SetCondition(true);
-            yield break;
-        }
-        
-        public virtual IEnumerator Transition(Action func)
-        {
-            SetCondition(true);
-            func();
-            yield break;
+            yield return new WaitForSeconds(TimeInterval);
         }
     }
 }

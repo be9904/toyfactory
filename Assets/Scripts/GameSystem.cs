@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AttnKare
@@ -8,23 +9,26 @@ namespace AttnKare
     {
         private StageSettings stageSettings;
         
-        private State waitingState = new Waiting();
-        private State playingState = new Playing();
+        private State waitingState;
+        private State playingState;
 
-        public Action<Action> OnStateChange;
+        public Action<Action> OnStageReady;
+        public Action<Action> OnStageEnd;
 
         // custom initialization function for monobehaviour inheriting class
         public GameSystem Init(StageSettings stageSettings)
         {
             // create states
-            waitingState = new Waiting();
-            playingState = new Playing();
+            waitingState = gameObject.AddComponent<Waiting>();
+            playingState = gameObject.AddComponent<Playing>();
+            waitingState.hideFlags = HideFlags.HideInInspector;
+            playingState.hideFlags = HideFlags.HideInInspector;
             
             int stateCount = 0;
             waitingState.SetStateID(stateCount++);
             playingState.SetStateID(stateCount++);
             
-            State = waitingState;
+            currentState = waitingState;
 
             // load stage settings
             if (stageSettings == null)
@@ -34,77 +38,35 @@ namespace AttnKare
             }
 
             // setup state machine event
-            OnStateChange += UpdateState;
+            OnStageReady += StartState;
+            OnStageEnd   += EndState;
             
             // start state machine
-            StartCoroutine(waitingState.Keep());
+            StartCoroutine(waitingState.LoopState());
             
             return this;
         }
 
-        void UpdateState(Action func)
+        // waiting -> playing
+        void StartState(Action func)
         {
-            if (Status)
-            {
-                SetState(waitingState);
-                Debug.Log("Game Over");
-            }
-            else if (State.GetStateID() == waitingState.GetStateID())
-            {
-                SetState(playingState, func);
-            }
-            else if (State.GetStateID() == playingState.GetStateID())
-            {
-                SetState(waitingState, func);
-            }
+            InvokeTransition(waitingState, playingState);
+            func();
+        }
+        
+        // playing -> waiting
+        void EndState(Action func)
+        {
+            InvokeTransition(playingState, waitingState);
+            func();
         }
     }
 
     #region STATE_WAITING
-    public class Waiting : State
-    {
-        public override IEnumerator Keep()
-        {
-            SetCondition(false);
-
-            while (!TransitionCondition)
-            {
-                // do what this state is supposed to do
-                yield return null;
-                Debug.Log("Current State: " + GetType());
-            }
-        }
-
-        public override IEnumerator Transition(Action loadStageInfo)
-        {
-            SetCondition(true);
-            loadStageInfo();
-            yield return new WaitForSeconds(3f);
-        }
-    }
+    public class Waiting : State { }
     #endregion
 
     #region STATE_PLAYING
-    public class Playing : State
-    {
-        public override IEnumerator Keep()
-        {
-            SetCondition(false);
-
-            while (!TransitionCondition)
-            {
-                // do what this state is supposed to do
-                yield return null;
-                Debug.Log("Current State: " + GetType());
-            }
-        }
-        
-        public override IEnumerator Transition(Action saveStageInfo)
-        {
-            SetCondition(true);
-            saveStageInfo();
-            yield return new WaitForSeconds(3f);
-        }
-    }
+    public class Playing : State { }
     #endregion
 }
