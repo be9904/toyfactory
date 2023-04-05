@@ -84,7 +84,7 @@ namespace AttnKare
             if (stageCounter < settingsList.Count)
                 currentStageSettings = settingsList[stageCounter];
             else
-                Debug.Log("Invalid stage counter: " + stageCounter);
+                Debug.Log(GetType() + " : Invalid stage counter: " + stageCounter);
         }
     }
 }

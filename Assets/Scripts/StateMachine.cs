@@ -51,6 +51,7 @@ namespace AttnKare
         public void End()
         {
             Status = true;
+            // do what needs to be done when game is over
         }
     }
 }
