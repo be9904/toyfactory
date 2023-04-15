@@ -2,7 +2,10 @@ fileFormatVersion: 2
 guid: 41aeedd919b114844b63ed28e6045f77
 ModelImporter:
   serializedVersion: 21202
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 6122662502839070793
+    second: Painter|Action
   externalObjects: {}
   materials:
     materialImportMode: 2
