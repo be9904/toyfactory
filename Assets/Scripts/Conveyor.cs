@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace AttnKare
@@ -7,10 +8,19 @@ namespace AttnKare
         private static float _speed = 25f;
         private Vector3 direction = new(0, 0, 1);
 
+        public bool useStopPoint;
+        public Transform stopPoint;
+
         public static float Speed
         {
             get => _speed;
             set => _speed = value;
+        }
+
+        private void Start()
+        {
+            if (stopPoint == null)
+                stopPoint = transform;
         }
 
         private void OnTriggerStay(Collider other)
@@ -19,10 +29,16 @@ namespace AttnKare
             if ((r = other.gameObject.GetComponent<Rigidbody>()) != null)
             {
                 r.velocity = Speed * direction * Time.deltaTime;
+                if (Mathf.Abs(other.gameObject.transform.position.z - stopPoint.position.z) < 0.001f 
+                    && useStopPoint)
+                {
+                    other.GetComponent<BoxCollider>().enabled = false;
+                    r.velocity = Vector3.zero;
+                }
             }
         }
 
-        public void SetSpeed(float speed)
+        public static void SetSpeed(float speed)
         {
             Speed = speed;
         }

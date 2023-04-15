@@ -17,6 +17,8 @@ namespace AttnKare
         [SerializeField] private bool painterUp;
         [SerializeField] private bool painterDown;
 
+        private GameManager.RobotColor currentColor;
+
         public bool PainterUp => painterUp;
         public bool PainterDown => painterDown;
 
@@ -62,6 +64,11 @@ namespace AttnKare
                 transform.localPosition = Vector3.Lerp(lowerLimit.localPosition , upperLimit.localPosition,
                     timer);
             }
+        }
+
+        public void ChooseColor(GameManager.RobotColor color)
+        {
+            currentColor = color;
         }
     }
 }

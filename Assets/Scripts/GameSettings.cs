@@ -9,6 +9,8 @@ namespace AttnKare
     {
         public float timeLimit;
         public float conveyorSpeed;
-        public int totalCount;
+        // game data to be saved -> should be moved
+        public int robotCount;
+        public int boxCount;
     }
 }

@@ -50,5 +50,18 @@ namespace AttnKare
             }
             // Debug.Log(destroyDetector.name);
         }
+
+        public void CheckRobot()
+        {
+            
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("Robot"))
+            {
+                CheckRobot();
+            }
+        }
     }
 }

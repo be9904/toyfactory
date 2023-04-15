@@ -1,27 +1,38 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace AttnKare
 {
     public class GameManager : MonoBehaviour
     {
+        // Singleton
         public static GameManager main { get; private set; }
 
+        // Game system & settings
         private GameSystem gameSystem;
         [SerializeField] private float timer;
         [SerializeField] private List<GameSettings> settingsList;
-
-        public int stageCounter;
         public GameSettings currentGameSettings;
+
+        // Stage settings
+        public int stageCounter;
+        
+        // Robot properties
+        public enum RobotColor{ YELLOW, GREEN, BLUE }
+        public RobotColor currentColor;
         private int existingRobots = 0;
 
+        // Stage Events
         public static Action<Action> StartStage;
         public static Action<Action> EndStage;
         
+        // Spawn Events
         public static Action RobotSpawnSequence;
         public static Action BoxSpawnSequence;
 
+        // References to other objects
         [Header("Reference to GameObjects")] 
         [SerializeField] private Painter robotPainter;
         [SerializeField] private Station robotStation;
@@ -52,6 +63,7 @@ namespace AttnKare
 
         private void Update()
         {
+            Debug.Log(Random.Range(1, 4));
             /*// stage ready (waiting -> playing)
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -126,9 +138,27 @@ namespace AttnKare
         /// </summary>
         public void SpawnRobot()
         {
+            int rndNum = Random.Range(1, 4);
+            switch (rndNum)
+            {
+                case 1:
+                    currentColor = RobotColor.YELLOW;
+                    break;
+                case 2:
+                    currentColor = RobotColor.GREEN;
+                    break;
+                case 3:
+                    currentColor = RobotColor.BLUE;
+                    break;
+                default:
+                    Debug.Log("GameManager : Color Out of Range");
+                    break;
+            }
+
             if (gameSystem.IsWaiting() && robotPainter.PainterUp)
             {
                 StartStage?.Invoke(PrepareStage);
+                Conveyor.SetSpeed(currentGameSettings.conveyorSpeed);
             }
                 
             if (existingRobots == 0 && robotPainter.PainterUp)
