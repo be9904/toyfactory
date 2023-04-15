@@ -10,7 +10,7 @@ namespace AttnKare
         public static float Speed
         {
             get => _speed;
-            private set {}
+            set => _speed = value;
         }
 
         private void OnTriggerStay(Collider other)

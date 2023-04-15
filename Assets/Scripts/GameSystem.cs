@@ -7,7 +7,7 @@ namespace AttnKare
 {
     public class GameSystem : StateMachine
     {
-        private StageSettings stageSettings;
+        private GameSettings _gameSettings;
         
         private State waitingState;
         private State playingState;
@@ -16,7 +16,7 @@ namespace AttnKare
         public Action<Action> OnStageEnd;
 
         // custom initialization function for monobehaviour inheriting class
-        public GameSystem Init(StageSettings stageSettings)
+        public GameSystem Init(GameSettings gameSettings)
         {
             // create states
             waitingState = gameObject.AddComponent<Waiting>();
@@ -31,15 +31,15 @@ namespace AttnKare
             currentState = waitingState;
 
             // load stage settings
-            if (stageSettings == null)
+            if (gameSettings == null)
             {
                 Debug.Log(GetType() + " : Invalid stage settings asset.");
                 return null;
             }
 
             // setup state machine event
-            OnStageReady += StartState;
-            OnStageEnd   += EndState;
+            GameManager.StartStage += StartStage;
+            GameManager.EndStage   += EndStage;
             
             // start state machine
             StartCoroutine(waitingState.LoopState());
@@ -47,15 +47,25 @@ namespace AttnKare
             return this;
         }
 
+        public bool IsWaiting()
+        {
+            return currentState.GetStateID() == waitingState.GetStateID();
+        }
+
+        public bool IsPlaying()
+        {
+            return currentState.GetStateID() == playingState.GetStateID();
+        }
+
         // waiting -> playing
-        void StartState(Action func)
+        void StartStage(Action func)
         {
             InvokeTransition(waitingState, playingState);
             func();
         }
         
         // playing -> waiting
-        void EndState(Action func)
+        void EndStage(Action func)
         {
             InvokeTransition(playingState, waitingState);
             func();

@@ -17,6 +17,15 @@ namespace AttnKare
         [SerializeField] private bool painterUp;
         [SerializeField] private bool painterDown;
 
+        public bool PainterUp => painterUp;
+        public bool PainterDown => painterDown;
+
+        private void Start()
+        {
+            timer = 0.5f;
+            Vector3.Lerp(lowerLimit.localPosition, upperLimit.localPosition, timer);
+        }
+
         // Update is called once per frame
         void Update() => MovePainter();
 

@@ -13,6 +13,11 @@ namespace AttnKare
             return currentState;
         }
 
+        public bool IsGameOver()
+        {
+            return Status;
+        }
+
         public bool IsCurrentState(State state)
         {
             return currentState.GetStateID() == state.GetStateID();
@@ -31,23 +36,7 @@ namespace AttnKare
                 Debug.Log(GetType() + " : Invalid transition invoked.");
             }
         }
-
-        /*public void SetState(State state)
-        {
-            StartCoroutine(currentState.EndState());
-            currentState = state;
-            StartCoroutine(currentState.LoopState());
-        }
         
-        public void SetState(State state, Action func)
-        {
-            StartCoroutine(currentState.EndState());
-            func();
-            currentState = state;
-            StartCoroutine(currentState.LoopState());
-        }*/
-
-        // end state machine
         public void End()
         {
             Status = true;
