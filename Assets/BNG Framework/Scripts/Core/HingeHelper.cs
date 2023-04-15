@@ -70,7 +70,21 @@ namespace BNG {
             // Update label used for display or debugging
             if (LabelToUpdate) {
                 float val = getSmoothedValue(SnapToDegrees ? nearestSnap : degrees);
-                LabelToUpdate.text = val.ToString("n0");
+                if (val >= 0 && val < 120)
+                {
+                    LabelToUpdate.text = "Yellow";
+                    LabelToUpdate.color = new Color(0.984f, 0.773f, 0.192f);
+                }
+                else if (val >= 120 && val < 240)
+                {
+                    LabelToUpdate.text = "Green";
+                    LabelToUpdate.color = new Color(0.267f, 0.741f, 0.196f);
+                }
+                else
+                {
+                    LabelToUpdate.text = "Blue";
+                    LabelToUpdate.color = new Color(0.29f, 0.62f, 0.906f);
+                }
             }
         }
 
