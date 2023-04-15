@@ -102,7 +102,7 @@ namespace BNG {
         Grabbable grab;
         Rigidbody rb;
         AudioSource audioSource;
-        bool switchedOn;
+        [HideInInspector] public bool isActivated;
 
         ConfigurableJoint configJoint;
         HingeJoint hingedJoint;
@@ -149,13 +149,17 @@ namespace BNG {
             OnLeverChange(LeverPercentage);
 
             // Up / Down Events
-            if ((LeverPercentage + SwitchTolerance) > 99 && !switchedOn) {
+            if ((LeverPercentage + SwitchTolerance) > 99 && !isActivated) {
                 OnLeverUp();
             }
-            else if ((LeverPercentage - SwitchTolerance) < 1 && switchedOn) {
+            else if ((LeverPercentage - SwitchTolerance) < 1 && !isActivated) {
                 OnLeverDown();
             }
-
+            else if ((LeverPercentage + SwitchTolerance) <= 99 && (LeverPercentage - SwitchTolerance) >= 1)
+            {
+                isActivated = false;
+            }
+            
             _lastLocalAngle = transform.localEulerAngles;
         }       
 
@@ -249,7 +253,7 @@ namespace BNG {
                 onLeverDown.Invoke();
             }
 
-            switchedOn = false;
+            isActivated = true;
 
             if (DropLeverOnActivation && grab != null) {
                 grab.DropItem(false, false);
@@ -271,7 +275,7 @@ namespace BNG {
                 onLeverUp.Invoke();
             }
 
-            switchedOn = true;
+            isActivated = true;
 
             if(DropLeverOnActivation && grab != null) {
                 grab.DropItem(false, false);

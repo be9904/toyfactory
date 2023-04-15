@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,47 +14,45 @@ namespace AttnKare
         [SerializeField] private float painterMoveSpeed;
 
         private float timer;
-        private bool leverUp;
-        private bool leverDown;
+        [SerializeField] private bool painterUp;
+        [SerializeField] private bool painterDown;
 
         // Update is called once per frame
         void Update() => MovePainter();
 
         void MovePainter()
         {
-            if (leverDown && painterControl.LeverPercentage < painterActivationThreshold)
+            // decrease lerp factor when lever is down
+            if (painterControl.isActivated && painterControl.LeverPercentage < painterActivationThreshold)
                 timer -= Time.deltaTime * painterMoveSpeed;
-
-            if (leverUp && 100f - painterControl.LeverPercentage < painterActivationThreshold)
+            
+            // increase lerp factor when lever is up
+            if (painterControl.isActivated && 100f - painterControl.LeverPercentage < painterActivationThreshold)
                 timer += Time.deltaTime * painterMoveSpeed;
 
+            // clamp lerp factor
             if (timer < 0)
             {
                 timer = 0;
+                painterDown = true;
             }
-
-            if (timer > 1)
+            else if (timer > 1)
             {
                 timer = 1;
+                painterUp = true;
+            }
+            else if (timer > 0 && timer < 1)
+            {
+                painterDown = false;
+                painterUp = false;
             }
             
+            // move painter when lerp factor is in range
             if (timer >= 0 && timer <= 1)
             {
                 transform.localPosition = Vector3.Lerp(lowerLimit.localPosition , upperLimit.localPosition,
                     timer);
             }
-        }
-
-        public void OnLeverUp()
-        {
-            Debug.Log("Lever Up");
-            leverUp = true;
-        }
-
-        public void OnLeverDown()
-        {
-            Debug.Log("Lever Down");
-            leverDown = true;
         }
     }
 }

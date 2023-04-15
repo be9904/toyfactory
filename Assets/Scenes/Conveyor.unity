@@ -135,7 +135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 158413461}
   m_Layer: 0
-  m_Name: Painter
+  m_Name: PainterGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1316,7 +1316,7 @@ PrefabInstance:
     - target: {fileID: 2109111115295015112, guid: a2419f9845db03f479057114b6bbbe86,
         type: 3}
       propertyPath: ReturnToCenter
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2109111115295015112, guid: a2419f9845db03f479057114b6bbbe86,
         type: 3}
@@ -1335,6 +1335,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2109111115295015112, guid: a2419f9845db03f479057114b6bbbe86,
         type: 3}
+      propertyPath: onLeverChange.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2109111115295015112, guid: a2419f9845db03f479057114b6bbbe86,
+        type: 3}
       propertyPath: onLeverUp.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
@@ -1350,6 +1355,11 @@ PrefabInstance:
       objectReference: {fileID: 6924695906049923084}
     - target: {fileID: 2109111115295015112, guid: a2419f9845db03f479057114b6bbbe86,
         type: 3}
+      propertyPath: onLeverChange.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2109111115295015112, guid: a2419f9845db03f479057114b6bbbe86,
+        type: 3}
       propertyPath: onLeverDown.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6924695906049923084}
@@ -1358,6 +1368,11 @@ PrefabInstance:
       propertyPath: onLeverUp.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2109111115295015112, guid: a2419f9845db03f479057114b6bbbe86,
+        type: 3}
+      propertyPath: onLeverChange.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6924695906049923084}
     - target: {fileID: 2109111115295015112, guid: a2419f9845db03f479057114b6bbbe86,
         type: 3}
       propertyPath: onLeverUp.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -1375,6 +1390,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2109111115295015112, guid: a2419f9845db03f479057114b6bbbe86,
         type: 3}
+      propertyPath: onLeverChange.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2109111115295015112, guid: a2419f9845db03f479057114b6bbbe86,
+        type: 3}
+      propertyPath: onLeverChange.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnLeverChanged
+      objectReference: {fileID: 0}
+    - target: {fileID: 2109111115295015112, guid: a2419f9845db03f479057114b6bbbe86,
+        type: 3}
       propertyPath: onLeverUp.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: AttnKare.Painter, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -1385,12 +1410,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2109111115295015112, guid: a2419f9845db03f479057114b6bbbe86,
         type: 3}
+      propertyPath: onLeverChange.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AttnKare.Painter, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2109111115295015112, guid: a2419f9845db03f479057114b6bbbe86,
+        type: 3}
       propertyPath: onLeverUp.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2109111115295015112, guid: a2419f9845db03f479057114b6bbbe86,
         type: 3}
       propertyPath: onLeverDown.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2109111115295015112, guid: a2419f9845db03f479057114b6bbbe86,
+        type: 3}
+      propertyPath: onLeverChange.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2109111116582765845, guid: a2419f9845db03f479057114b6bbbe86,
@@ -1946,7 +1981,7 @@ PrefabInstance:
     - target: {fileID: 5117709272763234211, guid: 2af1d2045149fe743b81bc4d1a6f8406,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.75
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 5117709272763234211, guid: 2af1d2045149fe743b81bc4d1a6f8406,
         type: 3}
@@ -5116,7 +5151,7 @@ GameObject:
   - component: {fileID: 2292028105083424032}
   - component: {fileID: 6924695906049923084}
   m_Layer: 0
-  m_Name: PainterGroup
+  m_Name: Painter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5139,6 +5174,10 @@ MonoBehaviour:
   lowerLimit: {fileID: 285967317}
   painterActivationThreshold: 0.5
   painterMoveSpeed: 0.3
+  leverUp: 0
+  leverDown: 0
+  painterUp: 0
+  painterDown: 0
 --- !u!33 &6961137702522393454
 MeshFilter:
   m_ObjectHideFlags: 0
