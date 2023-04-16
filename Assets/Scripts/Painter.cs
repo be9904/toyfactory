@@ -51,7 +51,6 @@ namespace AttnKare
         void Update()
         {
             MovePainter();
-            Debug.Log(currentColor);
         }
             
 
@@ -118,14 +117,10 @@ namespace AttnKare
                 robotToPaint = robot.GetComponent<Robot>();
                 UpdateRobotPaintProgress?.Invoke(robotToPaint.PaintProgress);
             }
-            else
-                Debug.Log("Robot to Paint is NULL");
         }
 
         public void OnPaintButton()
         {
-            Debug.Log("Paint Button is Down!");
-            
             if (robotToPaint && IsPaintable)
             {
                 // play vfx
@@ -134,6 +129,7 @@ namespace AttnKare
                 UpdateRobotPaintProgress?.Invoke(robotToPaint.PaintProgress);
             
                 // increase paint percentage of robot   
+                robotToPaint.SetColor(currentColor);
                 robotToPaint.PaintRobot(paintSpeed);
             }
         }

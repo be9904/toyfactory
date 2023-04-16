@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb2207326a69604439930e07766882a1, type: 3}
   m_Name: GameStats
   m_EditorClassIdentifier: 
-  robotCount: 1
+  robotCount: 0
   boxCount: 0

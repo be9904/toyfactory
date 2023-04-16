@@ -51,11 +51,11 @@ namespace AttnKare
             
             if (robot.Color == GameManager.main.currentColor && robot.IsPainted)
             {
-                Debug.Log("Robot Color: " + robot.Color + ", Current Color: " + GameManager.main.currentColor);
                 GameManager.main.gameStats.robotCount++;
                 return true;
             }
 
+            // Debug.Log("Robot Color: " + robot.Color + ", Current Color: " + GameManager.main.currentColor);
             return false;
         }
 

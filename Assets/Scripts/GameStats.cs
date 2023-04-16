@@ -11,5 +11,11 @@ namespace AttnKare
         public int robotCount;
         public int boxCount;
         // more data can be added here
+
+        public void ResetStats()
+        {
+            robotCount = 0;
+            boxCount = 0;
+        }
     }
 }

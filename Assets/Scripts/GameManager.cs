@@ -144,12 +144,13 @@ namespace AttnKare
                 Conveyor.SetSpeed(currentGameSettings.conveyorSpeed);
                 robotPainter.SetPaintSpeed(currentGameSettings.paintSpeed);
                 robotPainter.SetPainterMoveSpeed(currentGameSettings.painterMoveSpeed);
+                gameStats.ResetStats();
             }
                 
             // Spawn next robot when conveyor is empty
             if (existingRobots == 0 && robotPainter.PainterUp)
             {
-                // Debug.Log("GameManager : Spawned Robot");
+                Debug.Log("GameManager : Spawned " + currentColor + " Robot");
                 
                 // color that user needs to choose
                 int rndNum = Random.Range(1, 4);
