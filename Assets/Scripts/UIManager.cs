@@ -8,10 +8,16 @@ namespace AttnKare
 {
     public class UIManager : MonoBehaviour
     {
+        [Header("Main UI Canvas")]
+        [SerializeField] private GameObject mainCanvas;
         [SerializeField] private List<Sprite> spriteImages;
         [SerializeField] private Image mainImage;
         [SerializeField] private Text gameOverText;
+        [SerializeField] private Text scoreText;
         [SerializeField] private Text clock;
+
+        [Header("Warning UI Canvas")] 
+        [SerializeField] private GameObject warningCanvas;
 
         private void OnEnable()
         {
@@ -28,6 +34,7 @@ namespace AttnKare
         private void Start()
         {
             gameOverText.gameObject.SetActive(false);
+            scoreText.gameObject.SetActive(false);
         }
 
         private void Update()
@@ -49,6 +56,8 @@ namespace AttnKare
         {
             mainImage.gameObject.SetActive(false);
             gameOverText.gameObject.SetActive(true);
+            scoreText.text = "Score : " + GameManager.main.gameStats.robotCount;
+            scoreText.gameObject.SetActive(true);
         }
 
         void UpdateClock()
@@ -63,6 +72,18 @@ namespace AttnKare
 
                 clock.text = minutes.ToString("00") + ":" + seconds.ToString("00");
             }
+        }
+
+        public void DisableWarningUI()
+        {
+            StartCoroutine(AutoCloseWarningUI());
+        }
+
+        IEnumerator AutoCloseWarningUI()
+        {
+            yield return new WaitForSeconds(5f);
+            warningCanvas.SetActive(false);
+            mainCanvas.SetActive(true);
         }
     }
 }

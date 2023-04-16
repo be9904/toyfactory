@@ -35,15 +35,10 @@ namespace AttnKare
         public static Action BoxSpawnEvent;
         public static Action<GameObject> RobotDestroyEvent;
         public static Action<GameObject> BoxDestroyEvent;
-        
-        // Game Stat Events
-        
 
         // References to other objects
         [Header("Reference to GameObjects")] 
         [SerializeField] private Painter robotPainter;
-        [SerializeField] private RobotStation robotStation;
-        [SerializeField] private BoxStation boxStation;
 
         private void Awake()
         {
@@ -177,5 +172,11 @@ namespace AttnKare
         }
 
         #endregion
+
+        public void QuitGame()
+        {
+            Debug.Log("Quit Game!");
+            Application.Quit();
+        }
     }
 }
