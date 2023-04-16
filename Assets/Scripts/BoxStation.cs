@@ -7,16 +7,16 @@ namespace AttnKare
 {
     public class BoxStation : Station
     {
-        [SerializeField] private BoxCollider destroyDetector;
-
         private void OnEnable()
         {
-            GameManager.BoxSpawnSequence += Spawn;
+            GameManager.BoxSpawnEvent += Spawn;
+            GameManager.BoxDestroyEvent += Destroy;
         }
 
         private void OnDisable()
         {
-            GameManager.BoxSpawnSequence -= Spawn;
+            GameManager.BoxSpawnEvent -= Spawn;
+            GameManager.BoxDestroyEvent -= Destroy;
         }
 
         // Start is called before the first frame update
@@ -42,25 +42,38 @@ namespace AttnKare
                 obj.SetActive(false);
                 itemPool.Enqueue(obj);
             }
-            
-            // setup destroy detector
-            if (destroyDetector == null)
-            {
-                destroyDetector = GetComponent<BoxCollider>();
-            }
-            // Debug.Log(destroyDetector.name);
         }
 
-        public void CheckRobot()
+        public bool CheckRobot(Robot robot)
         {
+            if (robot == null)
+                return false;
             
+            if (robot.Color == GameManager.main.currentColor && robot.IsPainted)
+            {
+                Debug.Log("Robot Color: " + robot.Color + ", Current Color: " + GameManager.main.currentColor);
+                GameManager.main.gameStats.robotCount++;
+                return true;
+            }
+
+            return false;
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Robot"))
             {
-                CheckRobot();
+                // enqueue robot to pool
+                GameObject o;
+                Robot r = (o = other.gameObject).GetComponent<Robot>();
+                GameManager.main.existingRobots--;
+                GameManager.RobotDestroyEvent?.Invoke(o);
+                
+                // if robot is painted with right color, spawn box
+                if (CheckRobot(r))
+                {
+                    GameManager.BoxSpawnEvent?.Invoke();
+                }
             }
         }
     }

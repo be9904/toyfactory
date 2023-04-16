@@ -8,12 +8,14 @@ namespace AttnKare
     {
         private void OnEnable()
         {
-            GameManager.RobotSpawnSequence += Spawn;
+            GameManager.RobotSpawnEvent += Spawn;
+            GameManager.RobotDestroyEvent += Destroy;
         }
 
         private void OnDisable()
         {
-            GameManager.RobotSpawnSequence -= Spawn;
+            GameManager.RobotSpawnEvent -= Spawn;
+            GameManager.RobotDestroyEvent -= Destroy;
         }
         
         // Start is called before the first frame update

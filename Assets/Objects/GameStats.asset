@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4287187d5d913144a928795918883eda, type: 3}
-  m_Name: Stage1Settings
+  m_Script: {fileID: 11500000, guid: eb2207326a69604439930e07766882a1, type: 3}
+  m_Name: GameStats
   m_EditorClassIdentifier: 
-  timeLimit: 300
-  conveyorSpeed: 100
-  paintSpeed: 20
-  painterMoveSpeed: 0.4
+  robotCount: 1
+  boxCount: 0

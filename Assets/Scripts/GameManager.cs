@@ -19,18 +19,26 @@ namespace AttnKare
         // Stage settings
         public int stageCounter;
         
+        // Game Stats
+        public GameStats gameStats;
+        
         // Robot properties
         public enum RobotColor{ YELLOW, GREEN, BLUE }
         public RobotColor currentColor;
-        private int existingRobots = 0;
+        public int existingRobots = 0;
 
         // Stage Events
         public static Action<Action> StartStage;
         public static Action<Action> EndStage;
         
         // Spawn Events
-        public static Action RobotSpawnSequence;
-        public static Action BoxSpawnSequence;
+        public static Action RobotSpawnEvent;
+        public static Action BoxSpawnEvent;
+        public static Action<GameObject> RobotDestroyEvent;
+        public static Action<GameObject> BoxDestroyEvent;
+        
+        // Game Stat Events
+        
 
         // References to other objects
         [Header("Reference to GameObjects")] 
@@ -63,20 +71,12 @@ namespace AttnKare
 
         private void Update()
         {
-            /*// stage ready (waiting -> playing)
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                gameSystem.OnStageReady?.Invoke(PrepareStage);
-            }*/
+                BoxSpawnEvent?.Invoke();
+            }
 
-            /*// stage end (playing -> waiting)
-            if (Input.GetKeyDown(KeyCode.LeftControl))
-            {
-                gameSystem.OnStageEnd?.Invoke(FinishStage);
-            }*/
-            
             SpawnRobot();
-            // SpawnBox();
 
             if (!gameSystem.IsGameOver() && !gameSystem.IsWaiting())
                 if(timer <= currentGameSettings.timeLimit)
@@ -137,54 +137,40 @@ namespace AttnKare
         /// </summary>
         public void SpawnRobot()
         {
-            int rndNum = Random.Range(1, 4);
-            switch (rndNum)
-            {
-                case 1:
-                    currentColor = RobotColor.YELLOW;
-                    break;
-                case 2:
-                    currentColor = RobotColor.GREEN;
-                    break;
-                case 3:
-                    currentColor = RobotColor.BLUE;
-                    break;
-                default:
-                    Debug.Log("GameManager : Color Out of Range");
-                    break;
-            }
-
             // Setup game settings on initial start
             if (gameSystem.IsWaiting() && robotPainter.PainterUp)
             {
                 StartStage?.Invoke(PrepareStage);
                 Conveyor.SetSpeed(currentGameSettings.conveyorSpeed);
                 robotPainter.SetPaintSpeed(currentGameSettings.paintSpeed);
+                robotPainter.SetPainterMoveSpeed(currentGameSettings.painterMoveSpeed);
             }
                 
             // Spawn next robot when conveyor is empty
             if (existingRobots == 0 && robotPainter.PainterUp)
             {
-                Debug.Log("Invoke SpawnRobot()");
+                // Debug.Log("GameManager : Spawned Robot");
+                
+                // color that user needs to choose
+                int rndNum = Random.Range(1, 4);
+                switch (rndNum)
+                {
+                    case 1:
+                        currentColor = RobotColor.YELLOW;
+                        break;
+                    case 2:
+                        currentColor = RobotColor.GREEN;
+                        break;
+                    case 3:
+                        currentColor = RobotColor.BLUE;
+                        break;
+                    default:
+                        Debug.Log("GameManager : Color Out of Range");
+                        break;
+                }
                 
                 existingRobots++;
-                RobotSpawnSequence?.Invoke();
-            }
-        }
-
-        /// <summary>
-        /// All the work that needs to be done to start the process of making a box.
-        /// <br/>
-        /// Enqueue robot to robot pool and dequeue box from box pool. 
-        /// </summary>
-        public void SpawnBox()
-        {
-            if (existingRobots == 1 && robotPainter.PainterUp)
-            {
-                Debug.Log("Invoke SpawnBox()");
-                
-                existingRobots--;
-                BoxSpawnSequence?.Invoke();
+                RobotSpawnEvent?.Invoke();
             }
         }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -7,8 +8,10 @@ namespace AttnKare
 {
     public class Robot : Spawnable
     {
-        public Color robotColor;
-        
+        private GameManager.RobotColor robotColor;
+
+        public GameManager.RobotColor Color => robotColor;
+
         [SerializeField] private float paintProgress;
 
         public float PaintProgress => paintProgress;
@@ -19,23 +22,21 @@ namespace AttnKare
             get => _isPainted;
             set => _isPainted = value;
         }
-        
-        // Start is called before the first frame update
-        void Start()
-        {
-            InitRandom();
-        }
 
         public void PaintRobot(float paintSpeed)
         {
             if(paintProgress < 100)
                 paintProgress += Time.deltaTime * paintSpeed;
-            /*else
-            {
-                _isPainted = true;
-            }*/
         }
 
-        public override void InitRandom() { }
+        public void SetColor(GameManager.RobotColor color)
+        {
+            robotColor = color;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log(other.gameObject.name);
+        }
     }
 }

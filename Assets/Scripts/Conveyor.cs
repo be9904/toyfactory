@@ -8,7 +8,7 @@ namespace AttnKare
         private static float _speed = 25f;
         private Vector3 direction = new(0, 0, 1);
 
-        public bool useStopPoint;
+        public bool hasStopPoint;
         public Transform stopPoint;
 
         public static Action<bool, GameObject> RobotInPosition;
@@ -32,7 +32,7 @@ namespace AttnKare
             {
                 r.velocity = Speed * direction * Time.deltaTime;
                 if (Mathf.Abs(other.gameObject.transform.position.z - stopPoint.position.z) < 0.001f 
-                    && useStopPoint && other.gameObject.CompareTag("Robot"))
+                    && hasStopPoint && other.gameObject.CompareTag("Robot"))
                 {
                     Robot robotCmp = other.gameObject.GetComponent<Robot>();
                     if (!robotCmp.IsPainted)

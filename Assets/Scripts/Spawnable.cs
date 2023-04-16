@@ -4,8 +4,5 @@ using UnityEngine;
 
 namespace AttnKare
 {
-    public abstract class Spawnable : MonoBehaviour
-    {
-        public abstract void InitRandom();
-    }
+    public abstract class Spawnable : MonoBehaviour{}
 }

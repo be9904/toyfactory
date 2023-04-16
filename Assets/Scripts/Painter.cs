@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using BNG;
 using UnityEngine;
 
 namespace AttnKare
@@ -30,11 +31,13 @@ namespace AttnKare
         private void OnEnable()
         {
             Conveyor.RobotInPosition += IsRobotInPosition;
+            HingeHelper.OnKnobTurn += SetPaintColor;
         }
 
         private void OnDisable()
         {
             Conveyor.RobotInPosition -= IsRobotInPosition;
+            HingeHelper.OnKnobTurn -= SetPaintColor;
         }
 
         private void Start()
@@ -44,7 +47,12 @@ namespace AttnKare
         }
 
         // Update is called once per frame
-        void Update() => MovePainter();
+        void Update()
+        {
+            MovePainter();
+            Debug.Log(currentColor);
+        }
+            
 
         void MovePainter()
         {
@@ -89,6 +97,16 @@ namespace AttnKare
         public void SetPaintSpeed(float speed)
         {
             paintSpeed = speed;
+        }
+
+        public void SetPaintColor(GameManager.RobotColor color)
+        {
+            currentColor = color;
+        }
+
+        public void SetPainterMoveSpeed(float speed)
+        {
+            painterMoveSpeed = speed;
         }
 
         void IsRobotInPosition(bool isIn, GameObject robot)

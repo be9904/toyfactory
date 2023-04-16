@@ -24,5 +24,17 @@ namespace AttnKare
         
             Debug.Log(gameObject.name + " Pool is empty");
         }
+
+        public void Destroy(GameObject obj)
+        {
+            itemPool.Enqueue(obj);
+            if (obj != null)
+            {
+                obj.SetActive(false);
+                return;
+            }
+            
+            Debug.Log(gameObject.name + " Pool is FULL");
+        }
     }
 }

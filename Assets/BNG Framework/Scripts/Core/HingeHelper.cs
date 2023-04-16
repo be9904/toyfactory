@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using AttnKare;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,6 +33,8 @@ namespace BNG {
         [Header("Change Events")]
         public FloatEvent onHingeChange;
         public FloatEvent onHingeSnapChange;
+
+        public static Action<GameManager.RobotColor> OnKnobTurn;
 
         Rigidbody rigid;
 
@@ -74,16 +77,19 @@ namespace BNG {
                 {
                     LabelToUpdate.text = "Yellow";
                     LabelToUpdate.color = new Color(0.984f, 0.773f, 0.192f);
+                    OnKnobTurn?.Invoke(GameManager.RobotColor.YELLOW);
                 }
                 else if (val >= 120 && val < 240)
                 {
                     LabelToUpdate.text = "Green";
                     LabelToUpdate.color = new Color(0.267f, 0.741f, 0.196f);
+                    OnKnobTurn?.Invoke(GameManager.RobotColor.GREEN);
                 }
                 else
                 {
                     LabelToUpdate.text = "Blue";
                     LabelToUpdate.color = new Color(0.29f, 0.62f, 0.906f);
+                    OnKnobTurn?.Invoke(GameManager.RobotColor.BLUE);
                 }
             }
         }
