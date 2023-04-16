@@ -7,27 +7,26 @@ namespace AttnKare
 {
     public class EndStation : Station
     {
-        private void OnEnable()
-        {
-            GameManager.BoxDestroyEvent += Destroy;
-        }
-        
-        private void OnDisable()
-        {
-            GameManager.BoxDestroyEvent -= Destroy;
-        }
+        [SerializeField] private BoxStation boxStation;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Box"))
             {
-                if (other.gameObject.GetComponent<Box>().IsProperBox)
-                {
-                    // increment success count
-                    GameManager.main.gameStats.boxCount++;
-                    // play success sound
-                }
+                Debug.Log(other.gameObject.name);
+                GameManager.BoxDestroyEvent?.Invoke(other.gameObject);
+                // play success sound
             }
+        }
+        
+        public override void Spawn()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Destroy(GameObject obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

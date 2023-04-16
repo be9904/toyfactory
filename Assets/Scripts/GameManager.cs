@@ -12,7 +12,7 @@ namespace AttnKare
 
         // Game system & settings
         private GameSystem gameSystem;
-        [SerializeField] private float timer;
+        public float timer;
         [SerializeField] private List<GameSettings> settingsList;
         public GameSettings currentGameSettings;
 
@@ -28,8 +28,8 @@ namespace AttnKare
         public int existingRobots = 0;
 
         // Stage Events
-        public static Action<Action> StartStage;
-        public static Action<Action> EndStage;
+        public static Action StartGame;
+        public static Action EndGame;
         
         // Spawn Events
         public static Action RobotSpawnEvent;
@@ -67,35 +67,27 @@ namespace AttnKare
                 else
                     gameSystem.Init(settingsList[0]);
             }
+            
+            gameStats.ResetStats();
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                BoxSpawnEvent?.Invoke();
-            }
-
             SpawnRobot();
+            
+            if(gameSystem.IsPlaying() && timer > currentGameSettings.timeLimit)
+                gameSystem.End();
 
             if (!gameSystem.IsGameOver() && !gameSystem.IsWaiting())
                 if(timer <= currentGameSettings.timeLimit)
                     timer += Time.deltaTime;
+            
+            if(gameSystem.IsGameOver())
+                EndGame?.Invoke();
         }
 
         #region STAGE_MANAGEMENT
 
-        /// <summary>
-        /// State changes from WAITING to PLAYING
-        /// </summary>
-        void PrepareStage()
-        {
-            // load stage settings
-            LoadGameSettings();
-            // reset player stats
-            // start robot, box spawn sequence
-        }
-        
         /// <summary>
         /// State changes from PLAYING to WAITING
         /// </summary>
@@ -140,15 +132,15 @@ namespace AttnKare
             // Setup game settings on initial start
             if (gameSystem.IsWaiting() && robotPainter.PainterUp)
             {
-                StartStage?.Invoke(PrepareStage);
+                StartGame?.Invoke();
+                LoadGameSettings();
                 Conveyor.SetSpeed(currentGameSettings.conveyorSpeed);
                 robotPainter.SetPaintSpeed(currentGameSettings.paintSpeed);
                 robotPainter.SetPainterMoveSpeed(currentGameSettings.painterMoveSpeed);
-                gameStats.ResetStats();
             }
                 
             // Spawn next robot when conveyor is empty
-            if (existingRobots == 0 && robotPainter.PainterUp)
+            if (existingRobots == 0 && robotPainter.PainterUp && gameSystem.IsPlaying())
             {
                 Debug.Log("GameManager : Spawned " + currentColor + " Robot");
                 

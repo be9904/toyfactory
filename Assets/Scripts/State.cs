@@ -33,7 +33,6 @@ namespace AttnKare
             {
                 // do what this state is supposed to do
                 yield return null;
-                Debug.Log("Current State: " + GetType());
             }
         }
         

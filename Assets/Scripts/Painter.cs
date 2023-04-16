@@ -19,12 +19,13 @@ namespace AttnKare
         [SerializeField] private bool painterDown;
 
         private GameManager.RobotColor currentColor;
+        [SerializeField] private List<Material> robotMaterials;
 
         public bool PainterUp => painterUp;
         public bool PainterDown => painterDown;
         public bool IsPaintable => robotIn && PainterDown;
 
-        [SerializeField] private Robot robotToPaint;
+        private Robot robotToPaint;
         private float paintSpeed;
         private bool robotIn;
         public Action<float> UpdateRobotPaintProgress;
@@ -140,7 +141,15 @@ namespace AttnKare
             {
                 Robot r = other.gameObject.GetComponent<Robot>();
                 if (r.PaintProgress >= 100)
+                {
                     r.IsPainted = true;
+                    if (r.Color == GameManager.RobotColor.YELLOW)
+                        r.gameObject.GetComponent<Renderer>().material = robotMaterials[0];
+                    else if (r.Color == GameManager.RobotColor.GREEN)
+                        r.gameObject.GetComponent<Renderer>().material = robotMaterials[1];
+                    else if (r.Color == GameManager.RobotColor.BLUE)
+                        r.gameObject.GetComponent<Renderer>().material = robotMaterials[2];
+                }
             }
         }
     }

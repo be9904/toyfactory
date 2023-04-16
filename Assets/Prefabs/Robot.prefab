@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7754098084452508382, guid: 41aeedd919b114844b63ed28e6045f77, type: 3}
+  - {fileID: 2100000, guid: f4cf0c83f6487b047b22321502ce36b0, type: 2}
   - {fileID: -1950605101765674724, guid: 41aeedd919b114844b63ed28e6045f77, type: 3}
   - {fileID: 7802595350821234635, guid: 41aeedd919b114844b63ed28e6045f77, type: 3}
   - {fileID: -9172781364453489377, guid: 41aeedd919b114844b63ed28e6045f77, type: 3}
@@ -133,6 +133,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb72ab935809eb43855ee792bf5e032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  robotColor: {r: 0, g: 0, b: 0, a: 0}
-  boxCollider: {fileID: 1720063471818866819}
   paintProgress: 0

@@ -9,13 +9,11 @@ namespace AttnKare
     {
         // game data to be saved -> should be moved
         public int robotCount;
-        public int boxCount;
         // more data can be added here
 
         public void ResetStats()
         {
             robotCount = 0;
-            boxCount = 0;
         }
     }
 }

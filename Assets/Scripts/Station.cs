@@ -13,28 +13,9 @@ namespace AttnKare
         [SerializeField] protected Transform spawnParent;
 
         // spawn item
-        public void Spawn()
-        {
-            GameObject obj = itemPool?.Dequeue();
-            if (obj != null)
-            {
-                obj.SetActive(true);
-                return;
-            }
-        
-            Debug.Log(gameObject.name + " Pool is empty");
-        }
+        public abstract void Spawn();
 
-        public void Destroy(GameObject obj)
-        {
-            itemPool.Enqueue(obj);
-            if (obj != null)
-            {
-                obj.SetActive(false);
-                return;
-            }
-            
-            Debug.Log(gameObject.name + " Pool is FULL");
-        }
+        // destroy item
+        public abstract void Destroy(GameObject obj);
     }
 }

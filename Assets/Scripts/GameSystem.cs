@@ -38,8 +38,8 @@ namespace AttnKare
             }
 
             // setup state machine event
-            GameManager.StartStage += StartStage;
-            GameManager.EndStage   += EndStage;
+            GameManager.StartGame += StartGame;
+            GameManager.EndGame   += EndGame;
             
             // start state machine
             StartCoroutine(waitingState.LoopState());
@@ -58,17 +58,15 @@ namespace AttnKare
         }
 
         // waiting -> playing
-        void StartStage(Action func)
+        void StartGame()
         {
             InvokeTransition(waitingState, playingState);
-            func();
         }
         
         // playing -> waiting
-        void EndStage(Action func)
+        void EndGame()
         {
             InvokeTransition(playingState, waitingState);
-            func();
         }
     }
 

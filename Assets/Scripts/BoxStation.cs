@@ -66,15 +66,41 @@ namespace AttnKare
                 // enqueue robot to pool
                 GameObject o;
                 Robot r = (o = other.gameObject).GetComponent<Robot>();
-                GameManager.main.existingRobots--;
-                GameManager.RobotDestroyEvent?.Invoke(o);
                 
                 // if robot is painted with right color, spawn box
                 if (CheckRobot(r))
                 {
                     GameManager.BoxSpawnEvent?.Invoke();
                 }
+                
+                GameManager.RobotDestroyEvent?.Invoke(o);
+                GameManager.main.existingRobots--;
+                
             }
+        }
+
+        public override void Spawn()
+        {
+            GameObject obj = itemPool?.Dequeue();
+            if (obj != null)
+            {
+                obj.SetActive(true);
+                return;
+            }
+        
+            Debug.Log(gameObject.name + " Pool is empty");
+        }
+        
+        public override void Destroy(GameObject obj)
+        {
+            itemPool.Enqueue(obj);
+            if (obj != null)
+            {
+                obj.SetActive(false);
+                return;
+            }
+            
+            Debug.Log(gameObject.name + " Pool is FULL");
         }
     }
 }
