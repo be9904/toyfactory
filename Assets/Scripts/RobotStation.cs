@@ -46,7 +46,8 @@ namespace AttnKare
 
         public override void Spawn()
         {
-            GameObject obj = itemPool?.Dequeue();
+            Debug.Log("Robot Queue size: " + itemPool.GetCount());
+            GameObject obj = itemPool.Dequeue();
             if (obj != null)
             {
                 obj.SetActive(true);

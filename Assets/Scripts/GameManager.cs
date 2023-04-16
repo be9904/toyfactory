@@ -25,7 +25,7 @@ namespace AttnKare
         // Robot properties
         public enum RobotColor{ YELLOW, GREEN, BLUE }
         public RobotColor currentColor;
-        public int existingRobots = 0;
+        public bool existingRobots;
 
         // Stage Events
         public static Action StartGame;
@@ -139,10 +139,11 @@ namespace AttnKare
                 robotPainter.SetPainterMoveSpeed(currentGameSettings.painterMoveSpeed);
             }
                 
+            Debug.Log("Existing Robots: " + existingRobots);
+            
             // Spawn next robot when conveyor is empty
-            if (existingRobots == 0 && robotPainter.PainterUp && gameSystem.IsPlaying())
+            if (!existingRobots && robotPainter.PainterUp && gameSystem.IsPlaying())
             {
-                Debug.Log("GameManager : Spawned " + currentColor + " Robot");
                 
                 // color that user needs to choose
                 int rndNum = Random.Range(1, 4);
@@ -162,8 +163,8 @@ namespace AttnKare
                         break;
                 }
                 
-                existingRobots++;
                 RobotSpawnEvent?.Invoke();
+                existingRobots = true;
             }
         }
 

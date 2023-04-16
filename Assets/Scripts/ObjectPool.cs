@@ -13,6 +13,11 @@ namespace AttnKare
             pool = new Queue<GameObject>();
         }
 
+        public int GetCount()
+        {
+            return pool.Count;
+        }
+
         public void Enqueue(GameObject item)
         {
             pool.Enqueue(item);
@@ -22,9 +27,10 @@ namespace AttnKare
         {
             GameObject objectToSpawn = pool.Count > 0 ? pool.Dequeue() : null;
         
-            if (objectToSpawn == null) return null;
-        
-            return objectToSpawn;
+            if (objectToSpawn) 
+                return objectToSpawn;
+            
+            return null;
         }
     }
 }

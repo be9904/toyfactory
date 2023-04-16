@@ -63,25 +63,27 @@ namespace AttnKare
         {
             if (other.gameObject.CompareTag("Robot"))
             {
+                Debug.Log("BoxStation : Found Robot, enqueueing back to robot queue.");
+                Debug.Log("Box Queue size: " + itemPool.GetCount());
                 // enqueue robot to pool
-                GameObject o;
-                Robot r = (o = other.gameObject).GetComponent<Robot>();
-                
+                GameObject o = other.gameObject;
+
                 // if robot is painted with right color, spawn box
-                if (CheckRobot(r))
+                if (CheckRobot(o.GetComponent<Robot>()))
                 {
+                    Debug.Log("BoxStation : Valid Robot, Spawning Box");
                     GameManager.BoxSpawnEvent?.Invoke();
                 }
                 
                 GameManager.RobotDestroyEvent?.Invoke(o);
-                GameManager.main.existingRobots--;
+                GameManager.main.existingRobots = false;
                 
             }
         }
 
         public override void Spawn()
         {
-            GameObject obj = itemPool?.Dequeue();
+            GameObject obj = itemPool.Dequeue();
             if (obj != null)
             {
                 obj.SetActive(true);

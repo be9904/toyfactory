@@ -13,7 +13,6 @@ namespace AttnKare
         {
             if (other.gameObject.CompareTag("Box"))
             {
-                Debug.Log(other.gameObject.name);
                 GameManager.BoxDestroyEvent?.Invoke(other.gameObject);
                 // play success sound
             }
