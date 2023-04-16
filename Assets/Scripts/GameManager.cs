@@ -10,6 +10,8 @@ namespace AttnKare
         // Singleton
         public static GameManager main { get; private set; }
 
+        [SerializeField] private UIManager uiManager;
+        
         // Game system & settings
         private GameSystem gameSystem;
         public float timer;
@@ -90,12 +92,6 @@ namespace AttnKare
                 EndGame?.Invoke();
                 Debug.Log("GAME OVER");
             }
-
-            /*if (Input.GetKeyDown(KeyCode.A))
-            {
-                SpawnRandomRobot();
-                RobotSpawnEvent?.Invoke();
-            }*/
         }
 
         #region STAGE_MANAGEMENT
@@ -144,6 +140,7 @@ namespace AttnKare
             // Setup game settings on initial start
             if (gameSystem.IsWaiting() && robotPainter.PainterUp)
             {
+                uiManager.ShowMainImage();
                 StartGame?.Invoke();
                 SpawnRandomRobot();
                 RobotSpawnEvent?.Invoke();
@@ -173,9 +170,9 @@ namespace AttnKare
 
         #endregion
 
-        public void QuitGame()
+        public static void QuitGame()
         {
-            Debug.Log("Quit Game!");
+            Debug.Log("QUIT GAME!");
             Application.Quit();
         }
     }

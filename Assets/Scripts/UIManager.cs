@@ -11,6 +11,7 @@ namespace AttnKare
         [Header("Main UI Canvas")]
         [SerializeField] private GameObject mainCanvas;
         [SerializeField] private List<Sprite> spriteImages;
+        [SerializeField] private Text introText;
         [SerializeField] private Image mainImage;
         [SerializeField] private Text gameOverText;
         [SerializeField] private Text scoreText;
@@ -18,6 +19,8 @@ namespace AttnKare
 
         [Header("Warning UI Canvas")] 
         [SerializeField] private GameObject warningCanvas;
+        private float timer;
+        private bool buttonPressed;
 
         private void OnEnable()
         {
@@ -40,6 +43,18 @@ namespace AttnKare
         private void Update()
         {
             UpdateClock();
+            
+            if (warningCanvas.activeSelf)
+            {
+                timer += Time.deltaTime;
+                if (timer > 5f && !buttonPressed)
+                {
+                    warningCanvas.SetActive(false);
+                    mainCanvas.SetActive(true);
+                    QuitButton.ResetProgress();
+                    timer = 0f;
+                }
+            }
         }
 
         public void ChangeIcon()
@@ -74,16 +89,20 @@ namespace AttnKare
             }
         }
 
-        public void DisableWarningUI()
+        public void ShowMainImage()
         {
-            StartCoroutine(AutoCloseWarningUI());
+            introText.gameObject.SetActive(false);
+            mainImage.gameObject.SetActive(true);
         }
 
-        IEnumerator AutoCloseWarningUI()
+        public void OnQuitButtonDown()
         {
-            yield return new WaitForSeconds(5f);
-            warningCanvas.SetActive(false);
-            mainCanvas.SetActive(true);
+            buttonPressed = true;
+        }
+        
+        public void OnQuitButtonUp()
+        {
+            buttonPressed = false;
         }
     }
 }
