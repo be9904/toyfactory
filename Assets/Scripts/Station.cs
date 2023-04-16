@@ -17,5 +17,7 @@ namespace AttnKare
 
         // destroy item
         public abstract void Destroy(GameObject obj);
+
+        public abstract void DisableStation();
     }
 }

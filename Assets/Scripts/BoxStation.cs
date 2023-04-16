@@ -11,12 +11,14 @@ namespace AttnKare
         {
             GameManager.BoxSpawnEvent += Spawn;
             GameManager.BoxDestroyEvent += Destroy;
+            GameManager.EndGame += DisableStation;
         }
 
         private void OnDisable()
         {
             GameManager.BoxSpawnEvent -= Spawn;
             GameManager.BoxDestroyEvent -= Destroy;
+            GameManager.EndGame -= DisableStation;
         }
 
         // Start is called before the first frame update
@@ -48,7 +50,7 @@ namespace AttnKare
         {
             if (robot == null)
                 return false;
-            
+
             if (robot.Color == GameManager.main.currentColor && robot.IsPainted)
             {
                 GameManager.main.gameStats.robotCount++;
@@ -59,25 +61,23 @@ namespace AttnKare
             return false;
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerExit(Collider other)
         {
             if (other.gameObject.CompareTag("Robot"))
             {
-                Debug.Log("BoxStation : Found Robot, enqueueing back to robot queue.");
-                Debug.Log("Box Queue size: " + itemPool.GetCount());
                 // enqueue robot to pool
                 GameObject o = other.gameObject;
 
                 // if robot is painted with right color, spawn box
                 if (CheckRobot(o.GetComponent<Robot>()))
                 {
-                    Debug.Log("BoxStation : Valid Robot, Spawning Box");
                     GameManager.BoxSpawnEvent?.Invoke();
                 }
                 
                 GameManager.RobotDestroyEvent?.Invoke(o);
-                GameManager.main.existingRobots = false;
                 
+                GameManager.main.SpawnRandomRobot();
+                GameManager.RobotSpawnEvent?.Invoke();
             }
         }
 
@@ -87,6 +87,7 @@ namespace AttnKare
             if (obj != null)
             {
                 obj.SetActive(true);
+                obj.transform.position = spawnPosition.position;
                 return;
             }
         
@@ -103,6 +104,11 @@ namespace AttnKare
             }
             
             Debug.Log(gameObject.name + " Pool is FULL");
+        }
+        
+        public override void DisableStation()
+        {
+            enabled = false;
         }
     }
 }

@@ -23,9 +23,8 @@ namespace AttnKare
         public GameStats gameStats;
         
         // Robot properties
-        public enum RobotColor{ YELLOW, GREEN, BLUE }
+        public enum RobotColor{ NONE, YELLOW, GREEN, BLUE }
         public RobotColor currentColor;
-        public bool existingRobots;
 
         // Stage Events
         public static Action StartGame;
@@ -43,8 +42,8 @@ namespace AttnKare
         // References to other objects
         [Header("Reference to GameObjects")] 
         [SerializeField] private Painter robotPainter;
-        [SerializeField] private Station robotStation;
-        [SerializeField] private Station boxStation;
+        [SerializeField] private RobotStation robotStation;
+        [SerializeField] private BoxStation boxStation;
 
         private void Awake()
         {
@@ -71,6 +70,15 @@ namespace AttnKare
             gameStats.ResetStats();
         }
 
+        private void Start()
+        {
+            // Load and setup game settings
+            LoadGameSettings();
+            Conveyor.SetSpeed(currentGameSettings.conveyorSpeed);
+            robotPainter.SetPaintSpeed(currentGameSettings.paintSpeed);
+            robotPainter.SetPainterMoveSpeed(currentGameSettings.painterMoveSpeed);
+        }
+
         private void Update()
         {
             SpawnRobot();
@@ -81,9 +89,18 @@ namespace AttnKare
             if (!gameSystem.IsGameOver() && !gameSystem.IsWaiting())
                 if(timer <= currentGameSettings.timeLimit)
                     timer += Time.deltaTime;
-            
-            if(gameSystem.IsGameOver())
+
+            if (gameSystem.IsGameOver())
+            {
                 EndGame?.Invoke();
+                Debug.Log("GAME OVER");
+            }
+
+            /*if (Input.GetKeyDown(KeyCode.A))
+            {
+                SpawnRandomRobot();
+                RobotSpawnEvent?.Invoke();
+            }*/
         }
 
         #region STAGE_MANAGEMENT
@@ -133,38 +150,29 @@ namespace AttnKare
             if (gameSystem.IsWaiting() && robotPainter.PainterUp)
             {
                 StartGame?.Invoke();
-                LoadGameSettings();
-                Conveyor.SetSpeed(currentGameSettings.conveyorSpeed);
-                robotPainter.SetPaintSpeed(currentGameSettings.paintSpeed);
-                robotPainter.SetPainterMoveSpeed(currentGameSettings.painterMoveSpeed);
-            }
-                
-            Debug.Log("Existing Robots: " + existingRobots);
-            
-            // Spawn next robot when conveyor is empty
-            if (!existingRobots && robotPainter.PainterUp && gameSystem.IsPlaying())
-            {
-                
-                // color that user needs to choose
-                int rndNum = Random.Range(1, 4);
-                switch (rndNum)
-                {
-                    case 1:
-                        currentColor = RobotColor.YELLOW;
-                        break;
-                    case 2:
-                        currentColor = RobotColor.GREEN;
-                        break;
-                    case 3:
-                        currentColor = RobotColor.BLUE;
-                        break;
-                    default:
-                        Debug.Log("GameManager : Color Out of Range");
-                        break;
-                }
-                
+                SpawnRandomRobot();
                 RobotSpawnEvent?.Invoke();
-                existingRobots = true;
+            }
+        }
+
+        public void SpawnRandomRobot()
+        {
+            // color that user needs to choose
+            int rndNum = Random.Range(1, 4);
+            switch (rndNum)
+            {
+                case 1:
+                    currentColor = RobotColor.YELLOW;
+                    break;
+                case 2:
+                    currentColor = RobotColor.GREEN;
+                    break;
+                case 3:
+                    currentColor = RobotColor.BLUE;
+                    break;
+                default:
+                    Debug.Log("GameManager : Color Out of Range");
+                    break;
             }
         }
 

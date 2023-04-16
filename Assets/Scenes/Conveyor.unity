@@ -906,7 +906,6 @@ MonoBehaviour:
   stageCounter: 0
   gameStats: {fileID: 11400000, guid: 16a2f689cd39ea94296d1b667694e4d5, type: 2}
   currentColor: 0
-  existingRobots: 0
   robotPainter: {fileID: 6924695906049923084}
   robotStation: {fileID: 9194459160880373792}
   boxStation: {fileID: 4898000879943588405}
@@ -3862,8 +3861,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.00953173, y: 0.008945223, z: 0.0063794134}
-  m_Center: {x: -0.00034941404, y: -0.000008248985, z: -0.00020577222}
+  m_Size: {x: 0.00953173, y: 0.008945223, z: 0.0092584565}
+  m_Center: {x: -0.00034941404, y: -0.000008248985, z: -0.0016452937}
 --- !u!33 &6961137702522393454
 MeshFilter:
   m_ObjectHideFlags: 0

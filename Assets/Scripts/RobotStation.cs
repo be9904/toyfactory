@@ -10,12 +10,14 @@ namespace AttnKare
         {
             GameManager.RobotSpawnEvent += Spawn;
             GameManager.RobotDestroyEvent += Destroy;
+            GameManager.EndGame += DisableStation;
         }
 
         private void OnDisable()
         {
             GameManager.RobotSpawnEvent -= Spawn;
             GameManager.RobotDestroyEvent -= Destroy;
+            GameManager.EndGame -= DisableStation;
         }
         
         // Start is called before the first frame update
@@ -46,11 +48,11 @@ namespace AttnKare
 
         public override void Spawn()
         {
-            Debug.Log("Robot Queue size: " + itemPool.GetCount());
             GameObject obj = itemPool.Dequeue();
             if (obj != null)
             {
                 obj.SetActive(true);
+                obj.transform.position = spawnPosition.position;
                 return;
             }
         
@@ -67,6 +69,11 @@ namespace AttnKare
             }
             
             Debug.Log(gameObject.name + " Pool is FULL");
+        }
+
+        public override void DisableStation()
+        {
+            enabled = false;
         }
     }
 }

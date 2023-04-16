@@ -27,5 +27,10 @@ namespace AttnKare
         {
             throw new NotImplementedException();
         }
+        
+        public override void DisableStation()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

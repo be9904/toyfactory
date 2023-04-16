@@ -10,6 +10,7 @@ namespace AttnKare
 
         public bool hasStopPoint;
         public Transform stopPoint;
+        private bool isDisabled;
 
         public static Action<bool, GameObject> RobotInPosition;
 
@@ -17,6 +18,16 @@ namespace AttnKare
         {
             get => _speed;
             set => _speed = value;
+        }
+
+        private void OnEnable()
+        {
+            GameManager.EndGame += DisableConveyor;
+        }
+        
+        private void OnDisable()
+        {
+            GameManager.EndGame -= DisableConveyor;
         }
 
         private void Start()
@@ -30,6 +41,12 @@ namespace AttnKare
             Rigidbody r;
             if ((r = other.gameObject.GetComponent<Rigidbody>()) != null)
             {
+                if (isDisabled)
+                {
+                    r.velocity = Vector3.zero;
+                    return;
+                }
+                
                 r.velocity = Speed * direction * Time.deltaTime;
                 if (Mathf.Abs(other.gameObject.transform.position.z - stopPoint.position.z) < 0.001f 
                     && hasStopPoint && other.gameObject.CompareTag("Robot"))
@@ -51,6 +68,12 @@ namespace AttnKare
         public static void SetSpeed(float speed)
         {
             Speed = speed;
+        }
+
+        public void DisableConveyor()
+        {
+            isDisabled = true;
+            enabled = false;
         }
     }
 }

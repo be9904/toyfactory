@@ -34,12 +34,14 @@ namespace AttnKare
         {
             Conveyor.RobotInPosition += IsRobotInPosition;
             HingeHelper.OnKnobTurn += SetPaintColor;
+            GameManager.EndGame += DisablePainter;
         }
 
         private void OnDisable()
         {
             Conveyor.RobotInPosition -= IsRobotInPosition;
             HingeHelper.OnKnobTurn -= SetPaintColor;
+            GameManager.EndGame -= DisablePainter;
         }
 
         private void Start()
@@ -151,6 +153,11 @@ namespace AttnKare
                         r.gameObject.GetComponent<Renderer>().material = robotMaterials[2];
                 }
             }
+        }
+
+        void DisablePainter()
+        {
+            enabled = false;
         }
     }
 }

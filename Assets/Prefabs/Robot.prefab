@@ -133,4 +133,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb72ab935809eb43855ee792bf5e032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paintProgress: 0
+  defaultMaterial: {fileID: 2100000, guid: f4cf0c83f6487b047b22321502ce36b0, type: 2}
