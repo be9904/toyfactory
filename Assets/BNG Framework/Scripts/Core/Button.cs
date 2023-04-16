@@ -30,6 +30,7 @@ namespace BNG {
 
         public UnityEvent onButtonDown;
         public UnityEvent onButtonUp;
+        public UnityEvent onButton;
 
         AudioSource audioSource;
         Rigidbody rigid;
@@ -110,7 +111,11 @@ namespace BNG {
                 clickingDown = true;
                 OnButtonDown();
             }
-            // Click Up?
+            else if (buttonDownDistance <= ClickTolerance) {
+                clickingDown = true;
+                OnButton();
+            }
+                // Click Up?
             float buttonUpDistance = buttonUpPosition.y - transform.localPosition.y;
             if (buttonUpDistance <= ClickTolerance && clickingDown) {
                 clickingDown = false;
@@ -153,6 +158,11 @@ namespace BNG {
             if (onButtonUp != null) {
                 onButtonUp.Invoke();
             }
+        }
+
+        public virtual void OnButton()
+        {
+            onButton?.Invoke();
         }
 
         void OnTriggerEnter(Collider other) {

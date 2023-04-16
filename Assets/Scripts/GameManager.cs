@@ -92,7 +92,7 @@ namespace AttnKare
         void PrepareStage()
         {
             // load stage settings
-            LoadStageSettings();
+            LoadGameSettings();
             // reset player stats
             // start robot, box spawn sequence
         }
@@ -100,17 +100,17 @@ namespace AttnKare
         /// <summary>
         /// State changes from PLAYING to WAITING
         /// </summary>
-        void FinishStage()
+        void FinishGame()
         {
             // save stage status
-            SaveStageInfo();
+            SaveGameInfo();
             // stop robot, box spawn sequence
         }
 
         /// <summary>
         /// Saves stage info when stage ends.
         /// </summary>
-        void SaveStageInfo()
+        void SaveGameInfo()
         {
             stageCounter++;
             if(stageCounter > 2)
@@ -121,7 +121,7 @@ namespace AttnKare
         /// <summary>
         /// Loads stage settings from list according to stage counter
         /// </summary>
-        void LoadStageSettings()
+        void LoadGameSettings()
         {
             if (stageCounter < settingsList.Count)
                 currentGameSettings = settingsList[stageCounter];
@@ -155,12 +155,15 @@ namespace AttnKare
                     break;
             }
 
+            // Setup game settings on initial start
             if (gameSystem.IsWaiting() && robotPainter.PainterUp)
             {
                 StartStage?.Invoke(PrepareStage);
                 Conveyor.SetSpeed(currentGameSettings.conveyorSpeed);
+                robotPainter.SetPaintSpeed(currentGameSettings.paintSpeed);
             }
                 
+            // Spawn next robot when conveyor is empty
             if (existingRobots == 0 && robotPainter.PainterUp)
             {
                 Debug.Log("Invoke SpawnRobot()");

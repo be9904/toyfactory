@@ -21,6 +21,21 @@ namespace AttnKare
 
         public bool PainterUp => painterUp;
         public bool PainterDown => painterDown;
+        public bool IsPaintable => robotIn && painterDown;
+
+        [SerializeField] private Robot robotToPaint;
+        private float paintSpeed;
+        private bool robotIn;
+
+        private void OnEnable()
+        {
+            Conveyor.RobotInPosition += IsRobotInPosition;
+        }
+
+        private void OnDisable()
+        {
+            Conveyor.RobotInPosition -= IsRobotInPosition;
+        }
 
         private void Start()
         {
@@ -70,5 +85,45 @@ namespace AttnKare
         {
             currentColor = color;
         }
+
+        public void SetPaintSpeed(float speed)
+        {
+            paintSpeed = speed;
+        }
+
+        void IsRobotInPosition(bool isIn, GameObject robot)
+        {
+            robotIn = isIn;
+            robotToPaint = robot.GetComponent<Robot>();
+        }
+
+        public void OnPaintButton()
+        {
+            Debug.Log("Paint Button is Down!");
+            
+            // play vfx
+            
+            // increase paint percentage of robot
+            robotToPaint.PaintRobot(paintSpeed);
+        }
+
+        /*private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("Robot"))
+            {
+                Debug.Log(other.gameObject.name + " is in");
+                robotIn = true;
+                robotToPaint = other.gameObject.GetComponent<Robot>();
+            }
+        }
+        
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.CompareTag("Robot"))
+            {
+                robotIn = false;
+                robotToPaint = null;
+            }
+        }*/
     }
 }

@@ -9,6 +9,8 @@ namespace AttnKare
     {
         public Color robotColor;
 
+        private BoxCollider boxCollider;
+        [SerializeField] private float paintProgress;
         private bool _isPainted;
         public bool IsPainted
         {
@@ -19,12 +21,22 @@ namespace AttnKare
         // Start is called before the first frame update
         void Start()
         {
+            boxCollider = GetComponent<BoxCollider>();
             InitRandom();
         }
 
-        public override void InitRandom()
+        public void PaintRobot(float paintSpeed)
         {
-            
+            if(paintProgress < 100)
+                paintProgress += Time.deltaTime * paintSpeed;
+            else
+            {
+                _isPainted = true;
+                boxCollider.enabled = true;
+                Conveyor.RobotInPosition?.Invoke(false, null);
+            }
         }
+
+        public override void InitRandom() { }
     }
 }

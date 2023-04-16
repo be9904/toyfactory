@@ -11,6 +11,8 @@ namespace AttnKare
         public bool useStopPoint;
         public Transform stopPoint;
 
+        public static Action<bool, GameObject> RobotInPosition;
+
         public static float Speed
         {
             get => _speed;
@@ -34,6 +36,13 @@ namespace AttnKare
                 {
                     other.GetComponent<BoxCollider>().enabled = false;
                     r.velocity = Vector3.zero;
+                    if (other.gameObject.CompareTag("Robot"))
+                    {
+                        Debug.Log(other.gameObject.name);
+                        RobotInPosition?.Invoke(true, other.gameObject);
+                    }
+                    else
+                        Debug.Log("Object is not a Robot");
                 }
             }
         }

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeLimit: 300
   conveyorSpeed: 25
+  paintSpeed: 10
   robotCount: 0
   boxCount: 0
