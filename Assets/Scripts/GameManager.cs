@@ -63,7 +63,6 @@ namespace AttnKare
 
         private void Update()
         {
-            Debug.Log(Random.Range(1, 4));
             /*// stage ready (waiting -> playing)
             if (Input.GetKeyDown(KeyCode.Space))
             {

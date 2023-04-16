@@ -134,4 +134,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   robotColor: {r: 0, g: 0, b: 0, a: 0}
+  boxCollider: {fileID: 1720063471818866819}
   paintProgress: 0

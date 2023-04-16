@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Stage1Settings
   m_EditorClassIdentifier: 
   timeLimit: 300
-  conveyorSpeed: 25
-  paintSpeed: 10
+  conveyorSpeed: 75
+  paintSpeed: 20
   robotCount: 0
   boxCount: 0

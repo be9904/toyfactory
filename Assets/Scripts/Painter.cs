@@ -21,7 +21,7 @@ namespace AttnKare
 
         public bool PainterUp => painterUp;
         public bool PainterDown => painterDown;
-        public bool IsPaintable => robotIn && painterDown;
+        public bool IsPaintable => robotIn && PainterDown;
 
         [SerializeField] private Robot robotToPaint;
         private float paintSpeed;
@@ -94,7 +94,10 @@ namespace AttnKare
         void IsRobotInPosition(bool isIn, GameObject robot)
         {
             robotIn = isIn;
-            robotToPaint = robot.GetComponent<Robot>();
+            if (robot)
+                robotToPaint = robot.GetComponent<Robot>();
+            else
+                Debug.Log("Robot to Paint is NULL");
         }
 
         public void OnPaintButton()
@@ -104,26 +107,18 @@ namespace AttnKare
             // play vfx
             
             // increase paint percentage of robot
-            robotToPaint.PaintRobot(paintSpeed);
+            if(robotToPaint && IsPaintable)
+                robotToPaint.PaintRobot(paintSpeed);
         }
 
-        /*private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.CompareTag("Robot"))
-            {
-                Debug.Log(other.gameObject.name + " is in");
-                robotIn = true;
-                robotToPaint = other.gameObject.GetComponent<Robot>();
-            }
-        }
-        
         private void OnTriggerExit(Collider other)
         {
             if (other.gameObject.CompareTag("Robot"))
             {
-                robotIn = false;
-                robotToPaint = null;
+                Robot r = other.gameObject.GetComponent<Robot>();
+                if (r.PaintProgress >= 100)
+                    r.IsPainted = true;
             }
-        }*/
+        }
     }
 }

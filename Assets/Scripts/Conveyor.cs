@@ -32,17 +32,18 @@ namespace AttnKare
             {
                 r.velocity = Speed * direction * Time.deltaTime;
                 if (Mathf.Abs(other.gameObject.transform.position.z - stopPoint.position.z) < 0.001f 
-                    && useStopPoint)
+                    && useStopPoint && other.gameObject.CompareTag("Robot"))
                 {
-                    other.GetComponent<BoxCollider>().enabled = false;
-                    r.velocity = Vector3.zero;
-                    if (other.gameObject.CompareTag("Robot"))
+                    Robot robotCmp = other.gameObject.GetComponent<Robot>();
+                    if (!robotCmp.IsPainted)
                     {
-                        Debug.Log(other.gameObject.name);
+                        r.velocity = Vector3.zero;
                         RobotInPosition?.Invoke(true, other.gameObject);
                     }
-                    else
-                        Debug.Log("Object is not a Robot");
+                    else // if IsPainted is true
+                    {
+                        RobotInPosition?.Invoke(false, null);
+                    }
                 }
             }
         }

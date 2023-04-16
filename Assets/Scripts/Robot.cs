@@ -8,9 +8,11 @@ namespace AttnKare
     public class Robot : Spawnable
     {
         public Color robotColor;
-
-        private BoxCollider boxCollider;
+        
         [SerializeField] private float paintProgress;
+
+        public float PaintProgress => paintProgress;
+
         private bool _isPainted;
         public bool IsPainted
         {
@@ -21,7 +23,6 @@ namespace AttnKare
         // Start is called before the first frame update
         void Start()
         {
-            boxCollider = GetComponent<BoxCollider>();
             InitRandom();
         }
 
@@ -29,12 +30,10 @@ namespace AttnKare
         {
             if(paintProgress < 100)
                 paintProgress += Time.deltaTime * paintSpeed;
-            else
+            /*else
             {
                 _isPainted = true;
-                boxCollider.enabled = true;
-                Conveyor.RobotInPosition?.Invoke(false, null);
-            }
+            }*/
         }
 
         public override void InitRandom() { }
