@@ -27,6 +27,7 @@ namespace AttnKare
         [SerializeField] private Robot robotToPaint;
         private float paintSpeed;
         private bool robotIn;
+        public Action<float> UpdateRobotPaintProgress;
 
         private void OnEnable()
         {
@@ -113,7 +114,10 @@ namespace AttnKare
         {
             robotIn = isIn;
             if (robot)
+            {
                 robotToPaint = robot.GetComponent<Robot>();
+                UpdateRobotPaintProgress?.Invoke(robotToPaint.PaintProgress);
+            }
             else
                 Debug.Log("Robot to Paint is NULL");
         }
@@ -122,11 +126,16 @@ namespace AttnKare
         {
             Debug.Log("Paint Button is Down!");
             
-            // play vfx
+            if (robotToPaint && IsPaintable)
+            {
+                // play vfx
+                
+                // update progress
+                UpdateRobotPaintProgress?.Invoke(robotToPaint.PaintProgress);
             
-            // increase paint percentage of robot
-            if(robotToPaint && IsPaintable)
+                // increase paint percentage of robot   
                 robotToPaint.PaintRobot(paintSpeed);
+            }
         }
 
         private void OnTriggerExit(Collider other)
