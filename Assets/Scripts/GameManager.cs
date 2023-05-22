@@ -89,8 +89,9 @@ namespace AttnKare
                 if(timer <= currentGameSettings.timeLimit)
                     timer += Time.deltaTime;
 
-            if (gameSystem.IsGameOver())
+            if (gameSystem.IsGameOver() && gameSystem.IsPlaying())
             {
+                DataManager.main.dataList["gameQuit"] = false;
                 EndGame?.Invoke();
                 Debug.Log("GAME OVER");
             }

@@ -116,6 +116,8 @@ namespace AttnKare.Interactables
         public override void OnRelease() {
             rigid.velocity = Vector3.zero;
             rigid.angularVelocity = Vector3.zero;
+            
+            DataManager.main.dataList["colorWheelGrabCount"] = (int)DataManager.main.dataList["colorWheelGrabCount"] + 1;
 
             base.OnRelease();
         }

@@ -21,6 +21,9 @@ namespace AttnKare.Interactables
 
         [Tooltip("If true the button can be pressed by physical object by utiizing a Spring Joint. Set to false if you don't need / want physics interactions, or are using this on a moving platform.")]
         public bool AllowPhysicsForces = true;
+        
+        public enum ButtonType{ Paint, Leave }
+        public ButtonType buttonType;
 
         List<Grabber> grabbers = new List<Grabber>(); // Grabbers in our trigger
         List<UITrigger> uiTriggers = new List<UITrigger>(); // UITriggers in our trigger
@@ -146,6 +149,8 @@ namespace AttnKare.Interactables
             if (onButtonDown != null) {
                 onButtonDown.Invoke();
             }
+            
+            DataManager.main.IncrementButtonCount(buttonType);
         }
 
         // Callback for ButtonDown

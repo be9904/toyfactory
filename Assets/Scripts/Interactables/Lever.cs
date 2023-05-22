@@ -256,6 +256,8 @@ namespace AttnKare.Interactables
             if (DropLeverOnActivation && grab != null) {
                 grab.DropItem(false, false);
             }
+
+            DataManager.main.dataList["leverDownCount"] = (int)DataManager.main.dataList["leverDownCount"] + 1;
         }
 
         /// <summary>
@@ -278,6 +280,8 @@ namespace AttnKare.Interactables
             if(DropLeverOnActivation && grab != null) {
                 grab.DropItem(false, false);
             }
+            
+            DataManager.main.dataList["leverUpCount"] = (int)DataManager.main.dataList["leverUpCount"] + 1;
         }
 
 #if UNITY_EDITOR

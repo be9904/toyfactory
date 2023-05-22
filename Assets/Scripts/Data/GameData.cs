@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 namespace AttnKare.Data
@@ -8,35 +9,51 @@ namespace AttnKare.Data
     public class GameData : ScriptableObject
     {
         public List<GameDataField> gameDataList;
-        
-        public string SerializeToJson()
+
+        public int FindDataIndex(string dataName)
         {
-            Dictionary<string, object> gameData = new Dictionary<string, object>();
+            foreach (GameDataField dataField in gameDataList)
+            {
+                if (dataName.Equals(dataField.dataName))
+                    return gameDataList.IndexOf(dataField);
+            }
+
+            return -1;
+        }
+        
+        public void SerializeToJson()
+        {
+            string json = "";
 
             foreach (GameDataField data in gameDataList)
             {
+                json += $"\t\"{data.dataName}\": ";
                 switch (data.dataType)
                 {
                     case DataType.INT:
-                        gameData[data.dataName] = data.intValue;
+                        json += data.intValue + ",";
                         break;
                     case DataType.FLOAT:
-                        gameData[data.dataName] = data.floatValue;
+                        json += data.floatValue + ",";
                         break;
                     case DataType.BOOL:
-                        gameData[data.dataName] = data.boolValue;
+                        json += (data.boolValue ? "true" : "false") + ",";
                         break;
                     case DataType.STRING:
-                        gameData[data.dataName] = data.stringValue;
+                        json += $"\"{data.stringValue}\",";
                         break;
                 }
+                json += "\n";
             }
 
-            string json = JsonUtility.ToJson(gameData);
-            
-            Debug.Log(json);
+            if (json.Length >= 2)
+                json = json.Substring(0, json.Length - 2) + "\n";
 
-            return json;
+            json = "{\n" + json + "}";
+            string filePath = Path.Combine(Application.persistentDataPath, "gamedata.json");
+            File.WriteAllText(filePath, json);
+            
+            Debug.Log("JSON file created at: " + filePath);
         }
     }
 }

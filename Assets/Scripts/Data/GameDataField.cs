@@ -31,11 +31,23 @@ namespace AttnKare.Data
             }
         }
 
+        public void SetValue(object val)
+        {
+            switch (dataType)
+            {
+                case DataType.INT:      intValue    = (int)val;       break;
+                case DataType.FLOAT:    floatValue  = (float)val;     break;
+                case DataType.BOOL:     boolValue   = (bool)val;      break;
+                case DataType.STRING:   stringValue = (string)val;    break;
+                default:                return;
+            }
+        }
+
         public void ResetAll()
         {
             intValue = 0;
             floatValue = 0f;
-            boolValue = false;
+            boolValue = true;
             stringValue = "";
         }
     }

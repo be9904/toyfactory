@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameDataList:
   - dataType: 0
-    dataName: leverPushCount
+    dataName: leverUpCount
     intValue: 0
     floatValue: 0
     boolValue: 0
     stringValue: 
   - dataType: 0
-    dataName: leverPullCount
+    dataName: leverDownCount
     intValue: 0
     floatValue: 0
     boolValue: 0
@@ -51,12 +51,6 @@ MonoBehaviour:
     stringValue: 
   - dataType: 0
     dataName: wrongColorRobotCount
-    intValue: 0
-    floatValue: 0
-    boolValue: 0
-    stringValue: 
-  - dataType: 1
-    dataName: averageColorTime
     intValue: 0
     floatValue: 0
     boolValue: 0
