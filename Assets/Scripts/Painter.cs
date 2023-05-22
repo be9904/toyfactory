@@ -123,10 +123,7 @@ namespace AttnKare
                     
                     // reset to default color
                     if (robotToPaint.Color != GameManager.RobotColor.NONE)
-                    {
-                        Debug.Log("Resetting Painted Robot");
                         robotToPaint.ResetRobot(robotToPaint.gameObject);
-                    }
                     SetVFXColor(currentColor);
                 }
 
