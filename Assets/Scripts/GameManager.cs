@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using AttnKare.Core;
+using AttnKare.Data;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

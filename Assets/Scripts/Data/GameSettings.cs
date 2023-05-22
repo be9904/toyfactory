@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace AttnKare
+namespace AttnKare.Data
 {
     [CreateAssetMenu(fileName = "New Game Settings Data", menuName = "ScriptableObjects/Game Settings Data")]
     public class GameSettings : ScriptableObject

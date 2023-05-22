@@ -1,8 +1,7 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
-namespace AttnKare
+namespace AttnKare.Core
 {
     public abstract class State : StateMachine
     {

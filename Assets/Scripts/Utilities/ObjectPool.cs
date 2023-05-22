@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AttnKare
+namespace AttnKare.Utilities
 {
     public class ObjectPool
     {

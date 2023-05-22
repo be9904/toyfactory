@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace AttnKare
+namespace AttnKare.Data
 {
     [CreateAssetMenu(fileName = "New Game Stats Data", menuName = "ScriptableObjects/Game Stats Data")]
     public class GameStats : ScriptableObject

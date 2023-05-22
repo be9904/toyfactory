@@ -1,9 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using AttnKare.Data;
 
-namespace AttnKare
+namespace AttnKare.Core
 {
     public class GameSystem : StateMachine
     {

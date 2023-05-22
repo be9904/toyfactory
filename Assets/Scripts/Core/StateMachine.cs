@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace AttnKare
+namespace AttnKare.Core
 {
     public abstract class StateMachine : MonoBehaviour
     {
