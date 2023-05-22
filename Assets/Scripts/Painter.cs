@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using AttnKare.Interactables;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.VFX;
 
 namespace AttnKare
@@ -31,6 +32,7 @@ namespace AttnKare
         private float paintSpeed;
         private bool robotIn;
         public Action<float> UpdateRobotPaintProgress;
+        public Slider progressBar;
 
         [SerializeField] List<VisualEffect> vfxAssets;
         
@@ -110,16 +112,26 @@ namespace AttnKare
 
         public void SetPaintColor(GameManager.RobotColor color)
         {
-            currentColor = color;
-
-            // reset progress on color change
-            if (currentColor != previousColor && robotToPaint)
+            if (painterDown)
             {
-                robotToPaint.PaintProgress = 0f;
-                SetVFXColor(currentColor);
-            }
+                currentColor = color;
 
-            previousColor = currentColor;
+                // reset progress on color change
+                if (currentColor != previousColor && robotToPaint)
+                {
+                    robotToPaint.PaintProgress = 0f;
+                    
+                    // reset to default color
+                    if (robotToPaint.Color != GameManager.RobotColor.NONE)
+                    {
+                        Debug.Log("Resetting Painted Robot");
+                        robotToPaint.ResetRobot(robotToPaint.gameObject);
+                    }
+                    SetVFXColor(currentColor);
+                }
+
+                previousColor = currentColor;
+            }
         }
 
         void SetVFXColor(GameManager.RobotColor color)
@@ -138,7 +150,8 @@ namespace AttnKare
                         vfx.SetVector4("spray_color", new Vector4(0, 0.3408983f, 1, 1));
                         break;
                     case GameManager.RobotColor.NONE:
-                        vfx.SetVector4("spray_color", new Vector4(1, 0, 0, 1));
+                        Debug.Log("Reset Color");
+                        vfx.SetVector4("spray_color", new Vector4(1, 1, 1, 1));
                         break;
                 }
             }
@@ -176,9 +189,9 @@ namespace AttnKare
                 robotToPaint.PaintRobot(paintSpeed);
             }
 
-            if (robotToPaint.PaintProgress > 100)
+            if (robotToPaint && robotToPaint.PaintProgress > 100)
             {
-                robotToPaint.PaintProgress = 100;
+                // robotToPaint.PaintProgress = 100;
                 
                 if (robotToPaint.Color == GameManager.RobotColor.YELLOW)
                     robotToPaint.gameObject.GetComponent<Renderer>().material = robotMaterials[0];

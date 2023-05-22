@@ -9940,6 +9940,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 1f14931b1be78914d9ddcd8838957ff0, type: 2}
   - {fileID: 2100000, guid: 2c11d4675a0741b4dbca397695ccf474, type: 2}
   - {fileID: 2100000, guid: 8d2d7969a1a234843a63016e455dfbd2, type: 2}
+  progressBar: {fileID: 1724998276}
   vfxAssets:
   - {fileID: 128367229}
   - {fileID: 1540426606}

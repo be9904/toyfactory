@@ -17,9 +17,9 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: -574
+    x: -311
     y: -618
-    width: 1941
+    width: 1677
     height: 2915
 --- !u!114 &114350483966674976
 MonoBehaviour:
@@ -694,7 +694,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":1.0,"y":3.0}'
+      m_SerializableObject: '{"x":2.0,"y":3.0}'
     m_Space: 2147483647
   m_Property:
     name: Count
@@ -3508,7 +3508,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 15
+      m_SerializableObject: 2
     m_Space: 2147483647
   m_Property:
     name: A
@@ -3542,7 +3542,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 20
+      m_SerializableObject: 3
     m_Space: 2147483647
   m_Property:
     name: B

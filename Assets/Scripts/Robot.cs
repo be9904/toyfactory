@@ -45,10 +45,11 @@ namespace AttnKare
             robotColor = color;
         }
 
-        void ResetRobot(GameObject obj)
+        public void ResetRobot(GameObject obj)
         {
             _isPainted = false;
             paintProgress = 0f;
+            SetColor(GameManager.RobotColor.NONE);
             gameObject.GetComponent<Renderer>().material = defaultMaterial;
         }
     }

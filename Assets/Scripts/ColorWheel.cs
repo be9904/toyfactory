@@ -50,18 +50,21 @@ namespace AttnKare
 
         void UpdateProgress(float progress)
         {
-            progressBar.value = progress / 100f;
-            switch (currentColor)
+            if (robotPainter.PainterDown)
             {
-                case GameManager.RobotColor.YELLOW:
-                    progressBarFill.color = new Color(0.984f, 0.773f, 0.192f);
-                    break;
-                case GameManager.RobotColor.GREEN:
-                    progressBarFill.color = new Color(0.267f, 0.741f, 0.196f);
-                    break;
-                case GameManager.RobotColor.BLUE:
-                    progressBarFill.color = new Color(0.29f, 0.62f, 0.906f);
-                    break;
+                progressBar.value = progress / 100f;
+                switch (currentColor)
+                {
+                    case GameManager.RobotColor.YELLOW:
+                        progressBarFill.color = new Color(0.984f, 0.773f, 0.192f);
+                        break;
+                    case GameManager.RobotColor.GREEN:
+                        progressBarFill.color = new Color(0.267f, 0.741f, 0.196f);
+                        break;
+                    case GameManager.RobotColor.BLUE:
+                        progressBarFill.color = new Color(0.29f, 0.62f, 0.906f);
+                        break;
+                }
             }
         }
     }
