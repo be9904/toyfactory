@@ -33,6 +33,7 @@ namespace AttnKare
         public Action<float> UpdateRobotPaintProgress;
 
         [SerializeField] List<VisualEffect> vfxAssets;
+        
 
         private void OnEnable()
         {
@@ -52,6 +53,7 @@ namespace AttnKare
         {
             timer = 0.5f;
             Vector3.Lerp(lowerLimit.localPosition, upperLimit.localPosition, timer);
+            SetVFXColor(GameManager.RobotColor.YELLOW);
         }
 
         // Update is called once per frame
@@ -112,9 +114,35 @@ namespace AttnKare
 
             // reset progress on color change
             if (currentColor != previousColor && robotToPaint)
+            {
                 robotToPaint.PaintProgress = 0f;
+                SetVFXColor(currentColor);
+            }
 
             previousColor = currentColor;
+        }
+
+        void SetVFXColor(GameManager.RobotColor color)
+        {
+            foreach (VisualEffect vfx in vfxAssets)
+            {
+                switch (color)
+                {
+                    case GameManager.RobotColor.YELLOW:
+                        vfx.SetVector4("spray_color", new Vector4(1, 1, 0, 1));
+                        break;
+                    case GameManager.RobotColor.GREEN:
+                        vfx.SetVector4("spray_color", new Vector4(0, 1, 0, 1));
+                        break;
+                    case GameManager.RobotColor.BLUE:
+                        vfx.SetVector4("spray_color", new Vector4(0, 0.3408983f, 1, 1));
+                        break;
+                    case GameManager.RobotColor.NONE:
+                        vfx.SetVector4("spray_color", new Vector4(1, 0, 0, 1));
+                        break;
+                }
+            }
+
         }
 
         public void SetPainterMoveSpeed(float speed)
@@ -138,16 +166,26 @@ namespace AttnKare
             {
                 // play vfx
                 foreach (VisualEffect vfx in vfxAssets)
-                {
                     vfx.Play();
-                }
-                
+
                 // update progress
                 UpdateRobotPaintProgress?.Invoke(robotToPaint.PaintProgress);
             
                 // increase paint percentage of robot   
                 robotToPaint.SetColor(currentColor);
                 robotToPaint.PaintRobot(paintSpeed);
+            }
+
+            if (robotToPaint.PaintProgress > 100)
+            {
+                robotToPaint.PaintProgress = 100;
+                
+                if (robotToPaint.Color == GameManager.RobotColor.YELLOW)
+                    robotToPaint.gameObject.GetComponent<Renderer>().material = robotMaterials[0];
+                else if (robotToPaint.Color == GameManager.RobotColor.GREEN)
+                    robotToPaint.gameObject.GetComponent<Renderer>().material = robotMaterials[1];
+                else if (robotToPaint.Color == GameManager.RobotColor.BLUE)
+                    robotToPaint.gameObject.GetComponent<Renderer>().material = robotMaterials[2];
             }
         }
 
@@ -158,14 +196,7 @@ namespace AttnKare
                 Robot r = other.gameObject.GetComponent<Robot>();
                 if (r.PaintProgress >= 100)
                 {
-                    r.IsPainted = true;
-                    if (r.Color == GameManager.RobotColor.YELLOW)
-                        r.gameObject.GetComponent<Renderer>().material = robotMaterials[0];
-                    else if (r.Color == GameManager.RobotColor.GREEN)
-                        r.gameObject.GetComponent<Renderer>().material = robotMaterials[1];
-                    else if (r.Color == GameManager.RobotColor.BLUE)
-                        r.gameObject.GetComponent<Renderer>().material = robotMaterials[2];
-                    
+                    robotToPaint.IsPainted = true;
                     GameManager.RobotSpawnEvent?.Invoke();
                 }
             }

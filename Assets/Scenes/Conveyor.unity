@@ -274,7 +274,7 @@ VisualEffect:
   m_GameObject: {fileID: 128367227}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 1f68f0be9838e6c44bb6809bb8df9381, type: 3}
-  m_InitialEventName: OnPlay
+  m_InitialEventName: Burst
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
@@ -288,7 +288,7 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 1, y: 0.9132024, z: 0, w: 1}
+      - m_Value: {x: 1, y: 0, z: 0, w: 1}
         m_Name: spray_color
         m_Overridden: 1
     m_Uint:
@@ -313,7 +313,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128367227}
   m_LocalRotation: {x: 0.0000022947788, y: -0.0000005066395, z: 0.707106, w: 0.70710766}
-  m_LocalPosition: {x: -0.0005, y: 0.0005, z: 0}
+  m_LocalPosition: {x: -0.0007, y: 0.0007, z: 0}
   m_LocalScale: {x: 0.0075, y: 0.0075, z: 0.0075}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -595,7 +595,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375818347}
   m_LocalRotation: {x: 0.0000022947788, y: -0.0000005066395, z: 0.707106, w: 0.70710766}
-  m_LocalPosition: {x: -0.0005, y: -0.0005, z: 0}
+  m_LocalPosition: {x: -0.0007, y: -0.0007, z: 0}
   m_LocalScale: {x: 0.0075, y: 0.0075, z: 0.0075}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -651,7 +651,7 @@ VisualEffect:
   m_GameObject: {fileID: 375818347}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 1f68f0be9838e6c44bb6809bb8df9381, type: 3}
-  m_InitialEventName: OnPlay
+  m_InitialEventName: Burst
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
@@ -665,7 +665,7 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 1, y: 0.9132024, z: 0, w: 1}
+      - m_Value: {x: 1, y: 0, z: 0, w: 1}
         m_Name: spray_color
         m_Overridden: 1
     m_Uint:
@@ -2115,7 +2115,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 897375858}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -2.9236422, y: 1.826758, z: -3.636}
+  m_LocalPosition: {x: -2.9236422, y: 1.88, z: -3.636}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3203,7 +3203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540426603}
   m_LocalRotation: {x: 0.0000022947788, y: -0.0000005066395, z: 0.707106, w: 0.70710766}
-  m_LocalPosition: {x: 0.0005, y: 0.0005, z: 0}
+  m_LocalPosition: {x: 0.0007, y: 0.0007, z: 0}
   m_LocalScale: {x: 0.0075, y: 0.0075, z: 0.0075}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -3259,7 +3259,7 @@ VisualEffect:
   m_GameObject: {fileID: 1540426603}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 1f68f0be9838e6c44bb6809bb8df9381, type: 3}
-  m_InitialEventName: OnPlay
+  m_InitialEventName: Burst
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
@@ -3273,7 +3273,7 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 1, y: 0.9132024, z: 0, w: 1}
+      - m_Value: {x: 1, y: 0, z: 0, w: 1}
         m_Name: spray_color
         m_Overridden: 1
     m_Uint:
@@ -4571,7 +4571,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2119700619}
   m_LocalRotation: {x: 0.0000022947788, y: -0.0000005066395, z: 0.707106, w: 0.70710766}
-  m_LocalPosition: {x: 0.0005, y: -0.0005, z: 0}
+  m_LocalPosition: {x: 0.0007, y: -0.0007, z: 0}
   m_LocalScale: {x: 0.0075, y: 0.0075, z: 0.0075}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -4627,7 +4627,7 @@ VisualEffect:
   m_GameObject: {fileID: 2119700619}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 1f68f0be9838e6c44bb6809bb8df9381, type: 3}
-  m_InitialEventName: OnPlay
+  m_InitialEventName: Burst
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
@@ -4641,7 +4641,7 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 1, y: 0.9132024, z: 0, w: 1}
+      - m_Value: {x: 1, y: 0, z: 0, w: 1}
         m_Name: spray_color
         m_Overridden: 1
     m_Uint:
