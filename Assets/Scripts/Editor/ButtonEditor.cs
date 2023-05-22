@@ -5,8 +5,6 @@ namespace AttnKare.Interactables
 {
     [CustomEditor(typeof(Button))]
     public class ButtonEditor : Editor {
-
-
         public override void OnInspectorGUI() {
 
             Button button = (Button)target;
