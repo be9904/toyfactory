@@ -77,8 +77,8 @@ namespace AttnKare
                 
                 GameManager.RobotDestroyEvent?.Invoke(o);
                 
-                GameManager.main.SpawnRandomRobot();
-                GameManager.RobotSpawnEvent?.Invoke();
+                GameManager.RobotDataEvent?.Invoke();
+                // GameManager.RobotSpawnEvent?.Invoke();
             }
         }
 

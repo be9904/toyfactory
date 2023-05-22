@@ -158,6 +158,8 @@ namespace AttnKare
                         r.gameObject.GetComponent<Renderer>().material = robotMaterials[1];
                     else if (r.Color == GameManager.RobotColor.BLUE)
                         r.gameObject.GetComponent<Renderer>().material = robotMaterials[2];
+                    
+                    GameManager.RobotSpawnEvent?.Invoke();
                 }
             }
         }

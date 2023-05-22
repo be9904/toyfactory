@@ -34,11 +34,12 @@ namespace AttnKare
         public static Action StartGame;
         public static Action EndGame;
         
-        // Spawn Events
+        // Spawn & Destroy Events
         public static Action RobotSpawnEvent;
         public static Action BoxSpawnEvent;
         public static Action<GameObject> RobotDestroyEvent;
         public static Action<GameObject> BoxDestroyEvent;
+        public static Action RobotDataEvent;
 
         // References to other objects
         [Header("Reference to GameObjects")] 
@@ -68,6 +69,9 @@ namespace AttnKare
             
             gameStats.ResetStats();
         }
+
+        private void OnEnable() => RobotDataEvent += ChooseRandomRobot;
+        private void OnDisable() => RobotDataEvent -= ChooseRandomRobot;
 
         private void Start()
         {
@@ -145,12 +149,12 @@ namespace AttnKare
             {
                 uiManager.ShowMainImage();
                 StartGame?.Invoke();
-                SpawnRandomRobot();
+                RobotDataEvent?.Invoke();
                 RobotSpawnEvent?.Invoke();
             }
         }
 
-        public void SpawnRandomRobot()
+        public void ChooseRandomRobot()
         {
             // color that user needs to choose
             int rndNum = Random.Range(1, 4);

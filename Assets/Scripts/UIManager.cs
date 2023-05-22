@@ -24,13 +24,13 @@ namespace AttnKare
 
         private void OnEnable()
         {
-            GameManager.RobotSpawnEvent += ChangeIcon;
+            GameManager.RobotDataEvent += ChangeIcon;
             GameManager.EndGame += ShowGameOverText;
         }
         
         private void OnDisable()
         {
-            GameManager.RobotSpawnEvent -= ChangeIcon;
+            GameManager.RobotDataEvent -= ChangeIcon;
             GameManager.EndGame -= ShowGameOverText;
         }
 
