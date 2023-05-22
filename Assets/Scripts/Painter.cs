@@ -1,14 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using BNG;
+using AttnKare.Interactables;
 using UnityEngine;
 
 namespace AttnKare
 {
     public class Painter : MonoBehaviour
     {
-        [SerializeField] private BNG.Lever painterControl;
+        [SerializeField] private Lever painterControl;
         [SerializeField] private Transform upperLimit;
         [SerializeField] private Transform lowerLimit;
         [SerializeField] private float painterActivationThreshold;
