@@ -18,6 +18,7 @@ namespace AttnKare
         [SerializeField] private bool painterUp;
         [SerializeField] private bool painterDown;
 
+        private GameManager.RobotColor previousColor;
         private GameManager.RobotColor currentColor;
         [SerializeField] private List<Material> robotMaterials;
 
@@ -105,6 +106,12 @@ namespace AttnKare
         public void SetPaintColor(GameManager.RobotColor color)
         {
             currentColor = color;
+
+            // reset progress on color change
+            if (currentColor != previousColor && robotToPaint)
+                robotToPaint.PaintProgress = 0f;
+
+            previousColor = currentColor;
         }
 
         public void SetPainterMoveSpeed(float speed)

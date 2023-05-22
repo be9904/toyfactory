@@ -11,7 +11,11 @@ namespace AttnKare
 
         private float paintProgress;
 
-        public float PaintProgress => paintProgress;
+        public float PaintProgress
+        {
+            get => paintProgress;
+            set => paintProgress = value;
+        } 
 
         private bool _isPainted;
         public bool IsPainted

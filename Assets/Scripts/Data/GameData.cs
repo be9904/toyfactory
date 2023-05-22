@@ -52,8 +52,6 @@ namespace AttnKare.Data
             json = "{\n" + json + "}";
             string filePath = Path.Combine(Application.persistentDataPath, "gamedata.json");
             File.WriteAllText(filePath, json);
-            
-            Debug.Log("JSON file created at: " + filePath);
         }
     }
 }
