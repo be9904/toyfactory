@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43436822b8b9ff844b3e5d24a57855f9, type: 3}
+  m_Name: GameDataList
+  m_EditorClassIdentifier: 
+  gameDataList:
+  - dataType: 0
+    dataName: leverPushCount
+    intValue: 0
+    floatValue: 0
+    boolValue: 0
+    stringValue: 
+  - dataType: 0
+    dataName: leverPullCount
+    intValue: 0
+    floatValue: 0
+    boolValue: 0
+    stringValue: 
+  - dataType: 0
+    dataName: paintButtonCount
+    intValue: 0
+    floatValue: 0
+    boolValue: 0
+    stringValue: 
+  - dataType: 0
+    dataName: leaveButtonCount
+    intValue: 0
+    floatValue: 0
+    boolValue: 0
+    stringValue: 
+  - dataType: 0
+    dataName: colorWheelGrabCount
+    intValue: 0
+    floatValue: 0
+    boolValue: 0
+    stringValue: 
+  - dataType: 0
+    dataName: correctColorRobotCount
+    intValue: 0
+    floatValue: 0
+    boolValue: 0
+    stringValue: 
+  - dataType: 0
+    dataName: wrongColorRobotCount
+    intValue: 0
+    floatValue: 0
+    boolValue: 0
+    stringValue: 
+  - dataType: 1
+    dataName: averageColorTime
+    intValue: 0
+    floatValue: 0
+    boolValue: 0
+    stringValue: 
+  - dataType: 2
+    dataName: gameQuit
+    intValue: 0
+    floatValue: 0
+    boolValue: 0
+    stringValue: 
