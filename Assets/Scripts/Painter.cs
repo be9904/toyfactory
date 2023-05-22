@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using AttnKare.Interactables;
 using UnityEngine;
+using UnityEngine.VFX;
 
 namespace AttnKare
 {
@@ -30,6 +31,8 @@ namespace AttnKare
         private float paintSpeed;
         private bool robotIn;
         public Action<float> UpdateRobotPaintProgress;
+
+        [SerializeField] List<VisualEffect> vfxAssets;
 
         private void OnEnable()
         {
@@ -134,6 +137,10 @@ namespace AttnKare
             if (robotToPaint && IsPaintable)
             {
                 // play vfx
+                foreach (VisualEffect vfx in vfxAssets)
+                {
+                    vfx.Play();
+                }
                 
                 // update progress
                 UpdateRobotPaintProgress?.Invoke(robotToPaint.PaintProgress);
