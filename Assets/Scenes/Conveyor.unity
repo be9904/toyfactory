@@ -5537,7 +5537,7 @@ MonoBehaviour:
   RemoteGrabDistance: 10
   ThrowForceMultiplier: 1
   ThrowForceMultiplierAngular: 1.125
-  BreakDistance: 1
+  BreakDistance: 0.4
   HideHandGraphics: 0
   ParentToHands: 0
   ParentHandModel: 0
