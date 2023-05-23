@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 128367229}
   - component: {fileID: 128367228}
   m_Layer: 0
-  m_Name: Spray_Single
+  m_Name: Spray_Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -288,13 +288,16 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 1, y: 0, z: 0, w: 1}
+      - m_Value: {x: 1, y: 1, z: 0, w: 1}
         m_Name: spray_color
         m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
-      m_Array: []
+      m_Array:
+      - m_Value: 120
+        m_Name: particle_count
+        m_Overridden: 1
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
@@ -313,7 +316,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128367227}
   m_LocalRotation: {x: 0.0000022947788, y: -0.0000005066395, z: 0.707106, w: 0.70710766}
-  m_LocalPosition: {x: -0.0007, y: 0.0007, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.0075, y: 0.0075, z: 0.0075}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -581,7 +584,7 @@ GameObject:
   - component: {fileID: 375818350}
   - component: {fileID: 375818349}
   m_Layer: 0
-  m_Name: Spray_Single (3)
+  m_Name: Spray_White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -595,7 +598,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375818347}
   m_LocalRotation: {x: 0.0000022947788, y: -0.0000005066395, z: 0.707106, w: 0.70710766}
-  m_LocalPosition: {x: -0.0007, y: -0.0007, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.0075, y: 0.0075, z: 0.0075}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -665,13 +668,16 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 1, y: 0, z: 0, w: 1}
+      - m_Value: {x: 0.7, y: 0.7, z: 0.7, w: 1}
         m_Name: spray_color
         m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
-      m_Array: []
+      m_Array:
+      - m_Value: 500000
+        m_Name: particle_count
+        m_Overridden: 1
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
@@ -3189,7 +3195,7 @@ GameObject:
   - component: {fileID: 1540426606}
   - component: {fileID: 1540426605}
   m_Layer: 0
-  m_Name: Spray_Single (1)
+  m_Name: Spray_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3203,7 +3209,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540426603}
   m_LocalRotation: {x: 0.0000022947788, y: -0.0000005066395, z: 0.707106, w: 0.70710766}
-  m_LocalPosition: {x: 0.0007, y: 0.0007, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.0075, y: 0.0075, z: 0.0075}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -3273,13 +3279,16 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 1, y: 0, z: 0, w: 1}
+      - m_Value: {x: 0, y: 1, z: 0, w: 1}
         m_Name: spray_color
         m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
-      m_Array: []
+      m_Array:
+      - m_Value: 120
+        m_Name: particle_count
+        m_Overridden: 1
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
@@ -4557,7 +4566,7 @@ GameObject:
   - component: {fileID: 2119700622}
   - component: {fileID: 2119700621}
   m_Layer: 0
-  m_Name: Spray_Single (2)
+  m_Name: Spray_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4571,7 +4580,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2119700619}
   m_LocalRotation: {x: 0.0000022947788, y: -0.0000005066395, z: 0.707106, w: 0.70710766}
-  m_LocalPosition: {x: 0.0007, y: -0.0007, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.0075, y: 0.0075, z: 0.0075}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -4641,13 +4650,16 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 1, y: 0, z: 0, w: 1}
+      - m_Value: {x: 0, y: 0.3408983, z: 1, w: 1}
         m_Name: spray_color
         m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
-      m_Array: []
+      m_Array:
+      - m_Value: 120
+        m_Name: particle_count
+        m_Overridden: 1
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
@@ -9942,8 +9954,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 8d2d7969a1a234843a63016e455dfbd2, type: 2}
   progressBar: {fileID: 1724998276}
   vfxAssets:
+  - {fileID: 375818350}
   - {fileID: 128367229}
   - {fileID: 1540426606}
+  - {fileID: 2119700622}
 --- !u!65 &6924695906049923085
 BoxCollider:
   m_ObjectHideFlags: 0

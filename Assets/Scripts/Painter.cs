@@ -55,7 +55,7 @@ namespace AttnKare
         {
             timer = 0.5f;
             Vector3.Lerp(lowerLimit.localPosition, upperLimit.localPosition, timer);
-            SetVFXColor(GameManager.RobotColor.YELLOW);
+            SprayPaint(GameManager.RobotColor.YELLOW);
         }
 
         // Update is called once per frame
@@ -123,36 +123,20 @@ namespace AttnKare
                     
                     // reset to default color
                     if (robotToPaint.Color != GameManager.RobotColor.NONE)
+                    {
                         robotToPaint.ResetRobot(robotToPaint.gameObject);
-                    SetVFXColor(currentColor);
+                        for(int i = 0 ; i < 10000 ; i++)
+                            SprayPaint(GameManager.RobotColor.NONE);
+                    }
                 }
 
                 previousColor = currentColor;
             }
         }
 
-        void SetVFXColor(GameManager.RobotColor color)
+        void SprayPaint(GameManager.RobotColor color)
         {
-            foreach (VisualEffect vfx in vfxAssets)
-            {
-                switch (color)
-                {
-                    case GameManager.RobotColor.YELLOW:
-                        vfx.SetVector4("spray_color", new Vector4(1, 1, 0, 1));
-                        break;
-                    case GameManager.RobotColor.GREEN:
-                        vfx.SetVector4("spray_color", new Vector4(0, 1, 0, 1));
-                        break;
-                    case GameManager.RobotColor.BLUE:
-                        vfx.SetVector4("spray_color", new Vector4(0, 0.3408983f, 1, 1));
-                        break;
-                    case GameManager.RobotColor.NONE:
-                        Debug.Log("Reset Color");
-                        vfx.SetVector4("spray_color", new Vector4(1, 1, 1, 1));
-                        break;
-                }
-            }
-
+            vfxAssets[(int)color].Play();
         }
 
         public void SetPainterMoveSpeed(float speed)
@@ -175,8 +159,7 @@ namespace AttnKare
             if (robotToPaint && IsPaintable)
             {
                 // play vfx
-                foreach (VisualEffect vfx in vfxAssets)
-                    vfx.Play();
+                SprayPaint(currentColor);
 
                 // update progress
                 UpdateRobotPaintProgress?.Invoke(robotToPaint.PaintProgress);
