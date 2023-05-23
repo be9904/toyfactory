@@ -55,7 +55,7 @@ namespace AttnKare
                 return;
             }
         
-            Debug.Log(gameObject.name + " Pool is empty");
+            // Debug.Log(gameObject.name + " Pool is empty");
         }
         
         public override void Destroy(GameObject obj)

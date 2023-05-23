@@ -25,7 +25,7 @@ namespace AttnKare.Utilities
 
         public GameObject Dequeue()
         {
-            GameObject objectToSpawn = pool.Count > 0 ? pool.Dequeue() : null;
+            GameObject objectToSpawn = pool.Count > 8 ? pool.Dequeue() : null;
         
             if (objectToSpawn) 
                 return objectToSpawn;
