@@ -55,7 +55,6 @@ namespace AttnKare
         {
             timer = 0.5f;
             Vector3.Lerp(lowerLimit.localPosition, upperLimit.localPosition, timer);
-            SprayPaint(GameManager.RobotColor.YELLOW);
         }
 
         // Update is called once per frame
